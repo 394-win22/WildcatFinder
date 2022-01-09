@@ -41,7 +41,7 @@ function App() {
               descriptionLine={Title.descriptionLine}
       />
       <FoundPosts posts={found_items.posts} />
-      {/* <Post item={found_items.item} location={found_items.found_location} image={found_items.img}/> */}
+      <Post item={found_items.item} location={found_items.found_location} image={found_items.img}/>
     </div>
   );
 }

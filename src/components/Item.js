@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'bootstrap';
+import { Modal } from 'react-bootstrap';
 import bottle from '../imgs/bottle.png';
 
 //Name, description, photo, location, contact
