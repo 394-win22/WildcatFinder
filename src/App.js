@@ -2,7 +2,9 @@ import './App.css'
 import Banner from './components/Banner'
 import FoundPosts from './components/FoundPosts'
 import ShowItem from './components/Item'
-import Post from './components/Post'
+import Button from "@mui/material/Button";
+import MakePost from './components/MakePost'
+import React, { useState } from 'react';
 
 const Title = {
   title: "WildcatFinder",
@@ -10,38 +12,83 @@ const Title = {
   descriptionLine: "Reporting lost items today!"
 }
 
-const found_items = {
-  "posts": {
-    'f1': {
+const buttonStyle = {
+  mx: 2,
+  width: 1/14,
+  bgcolor: "rgba(28,133,255,0.95)",
+  borderRadius: 2,
+  color: "rgb(255, 255, 255)",
+  '&:hover': {
+      bgcolor: "rgba(129,182,239,0.95)"
+  }
+}
+
+// lost: 0 , found: 1
+const items = {
+  posts: {
+    0: {
       "id": 1,
       "item": "water bottle",
-      "found_location": "Tech LR3",
-      "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg"
+      "location": "Tech LR3",
+      "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg",
+      "type": 1
     },
-    'f2': {
+    1: {
       "id": 2,
       "item": "airpods",
-      "found_location": "University Hall",
-      "img":"https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg"
+      "location": "University Hall",
+      "img":"https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg",
+      "type": 1
     },
-    'f3': {
+    2: {
       "id": 3,
       "item": "car keys",
-      "found_location": "Mudd Library",
+      "location": "Mudd Library",
       "img": "https://s2.loli.net/2022/01/10/lFUfXvHu8Lws3oO.jpg",
+      "type": 1
+    },
+    3: {
+      "id": 4,
+      "item": "tennis shoes",
+      "location": "Henry Crown Sports Pavilion",
+      "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+      "type": 0
+    },
+    4: {
+      "id": 5,
+      "item": "hat",
+      "location": "Elder Dining Hall",
+      "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+      "type": 0
     }
   }
 };
 
 function App() {
+  const [itemsType, setItemsType] = useState(1);
+  const [makePost, setMakePost] = useState(false);
+
+  const handleMakePost = () => setMakePost(true);
+  const handlesMakePostClose = () => setMakePost(false);
+  
   return (
     <div className="App">
       <Banner title={Title.title}
               subtitle={Title.subtitle}
               descriptionLine={Title.descriptionLine}
       />
-      <FoundPosts posts={found_items.posts} />
-      <Post item={found_items.item} location={found_items.found_location} image={found_items.img}/>
+      
+      <div>
+        <Button sx={buttonStyle}
+                onClick={() => setItemsType(0)}> Lost </Button>
+        <Button sx={buttonStyle}
+                onClick={() => setItemsType(1)}> Found </Button>    
+        <Button sx={buttonStyle}
+                onClick={() => handleMakePost()}> Post </Button>
+        <MakePost show={ makePost } handleClose={handlesMakePostClose}/>
+      </div>
+
+      <FoundPosts posts={items.posts} itemsType={itemsType} />
     </div>
   );
 }
