@@ -10,8 +10,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/system';
-import { red } from '@mui/material/colors'
+import { styled, shadows } from '@mui/system';
+import Box from '@mui/material/Box'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -21,7 +23,16 @@ const cardStyle = styled('div')({
     boxShadow: 6,
 });
 
-// import LocationOnIcon from '@mui/icons-material/LocationOn'; --> location icon (need to install mui/icons-material)
+const theme = createTheme({
+    typography: {
+        fontFamily: [
+            'Inter',
+            'sans-serif',
+        ].join(','),
+        subtitle: {fontWeight: 500},
+    },
+});
+
 
 const FoundPosts = ({ posts, itemsType }) => {
     const [showItem, setShowItem] = useState(false);
@@ -34,7 +45,7 @@ const FoundPosts = ({ posts, itemsType }) => {
     const handlesShowItemClose = () => setShowItem(false);
     
     return (
-        <div>
+        <div style={{ marginTop: "5rem", marginLeft: "20%", marginRight: "20%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
             {/* <ShowItem itemName={posts?.[getIndex]?.item} description={posts?.[getIndex]?.item} photo={posts?.[getIndex]?.img} location={posts?.[getIndex]?.location} contactInfo={"12345"}  show={showItem}
             handleClose={handlesShowItemClose}/> */}
@@ -44,26 +55,42 @@ const FoundPosts = ({ posts, itemsType }) => {
                     .map((post, idx) => {
                         return (
                             <div>
-                                <Card sx={{ bgcolor: red[500] }}>
-                                    <CardMedia
-                                        component="img"
-                                        height="300"
-                                        width="300"
-                                        image={post?.img}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {post?.item}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Location: {post.location}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
-                                    </CardActions>
-                                </Card>
-                                
+                                <ThemeProvider theme={theme}>
+                                    <Card sx={{ border: 1,
+                                                borderColor: '#D6D6D6',
+                                                borderRadius: 4,
+                                                m: 3,
+                                                boxShadow: '2px 2px 2px 1px #D6D6D6'
+                                                }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="150"
+                                            width="100%"
+                                            image={post?.img}
+                                        />
+                                        <CardContent sx={{ pt: 1,
+                                                            pb: 0}}>
+                                            <ThemeProvider theme={theme}>
+                                                <Typography gutterBottom variant="h6" component="div">
+                                                    {post?.item}
+                                                </Typography>
+                                            </ThemeProvider>
+                                            <ThemeProvider theme={theme}>
+                                                <Typography variant="subtitle" color="text.secondary" sx={{ p:0 }}>
+                                                    <LocationOnIcon sx={{ mr:1,
+                                                                            mb: 1}}/>
+                                                    {post.location}
+                                                </Typography>
+                                            </ThemeProvider>
+                                        </CardContent>
+                                        <CardActions sx={{ p: 0}}>
+                                            <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
+                                                <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
+                                            </Box>
+                                            
+                                        </CardActions>
+                                    </Card>
+                                </ThemeProvider>
                                 
                                 
                                  
