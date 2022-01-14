@@ -10,6 +10,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import '@mui/system';
+import './FoundPosts.css';
 
 // import LocationOnIcon from '@mui/icons-material/LocationOn'; --> location icon (need to install mui/icons-material)
 
@@ -34,7 +36,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                     .map((post, idx) => {
                         return (
                             <div>   
-                                <Card sx={{border: 1}}> 
+                                <Card sx={{ maxWidth: 200 }}> 
                                     <CardMedia
                                         component="img"
                                         height="300"
