@@ -15,13 +15,11 @@ function MakePost ({ show, handleClose }){
 
     const createPost = async ( post ) => {
         try {
-          const postRef = getRefByPush(`/`);
+          const postRef = getRefByPush(`/post`);
           const postKey = postRef.key;
           post = ({...post, 'id':postKey});
-        // console.log(post);/
-          await updateData('/', post);
+          await updateData(postRef, post);
       
-        //   updateDataByPath(`/apartments/${aptId}/users/${userID}/tasks`, {[taskKey] : false});
       
         } catch (error) {
           alert(error);

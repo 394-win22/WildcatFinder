@@ -98,7 +98,7 @@ function App() {
         <MakePost show={makePost} handleClose={handlesMakePostClose} />
       </div>
 
-      <FoundPosts posts={data} itemsType={itemsType} />
+      <FoundPosts posts={data.post} itemsType={itemsType} />
     </div>
   );
 }

@@ -10,14 +10,22 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import '@mui/system';
-import './FoundPosts.css';
+import { styled } from '@mui/system';
+import { red } from '@mui/material/colors'
+
+const cardStyle = styled('div')({
+    color: '#f50505',
+    backgroundColor: {
+        xs: "secondary.light", sm: "#0000ff"
+    },
+    boxShadow: 6,
+});
 
 // import LocationOnIcon from '@mui/icons-material/LocationOn'; --> location icon (need to install mui/icons-material)
 
 const FoundPosts = ({ posts, itemsType }) => {
     const [showItem, setShowItem] = useState(false);
-    const [getIndex, setIndex] = useState();
+    const [getIndex, setIndex] = useState();  
 
     const handleShowItem = (idx) => {
         setIndex(idx);
@@ -35,8 +43,8 @@ const FoundPosts = ({ posts, itemsType }) => {
                     .filter(post => post.type===itemsType)
                     .map((post, idx) => {
                         return (
-                            <div>   
-                                <Card sx={{ maxWidth: 200 }}> 
+                            <div>
+                                <Card sx={{ bgcolor: red[500] }}>
                                     <CardMedia
                                         component="img"
                                         height="300"
@@ -44,9 +52,9 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         image={post?.img}
                                     />
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div"> 
-                                            { post?.item}
-                                            </Typography>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {post?.item}
+                                        </Typography>
                                         <Typography variant="body2" color="text.secondary">
                                             Location: {post.location}
                                         </Typography>
@@ -54,7 +62,11 @@ const FoundPosts = ({ posts, itemsType }) => {
                                     <CardActions>
                                         <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
                                     </CardActions>
-                                </Card> 
+                                </Card>
+                                
+                                
+                                
+                                 
                             </div>
                         )
                     })
