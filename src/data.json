@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "itemName": "water bottle",
+        "location": "Tech LR3",
+        "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg",
+        "type": 1,
+        "date": "2022-1-14",
+        "time": "14:10",
+        "description": "",
+        "contact_info": "123-456-7890"
+    },
+    {
+        "id": 2,
+        "itemName": "airpods",
+        "location": "University Hall",
+        "img": "https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg",
+        "type": 1,
+        "date": "2022-1-14",
+        "time": "14:10",
+        "description": "",
+        "contact_info": "123-456-7890"
+    },
+    {
+        "id": 3,
+        "itemName": "car keys",
+        "location": "Mudd Library",
+        "img": "https://s2.loli.net/2022/01/10/lFUfXvHu8Lws3oO.jpg",
+        "type": 1,
+        "date": "2022-1-14",
+        "time": "14:10",
+        "description": "",
+        "contact_info": "123-456-7890"
+    },
+    {
+        "id": 4,
+        "itemName": "tennis shoes",
+        "location": "Henry Crown Sports Pavilion",
+        "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+        "type": 0,
+        "date": "2022-1-14",
+        "time": "14:10",
+        "description": "",
+        "contact_info": "123-456-7890"
+    },
+    {
+        "id": 5,
+        "itemName": "hat",
+        "location": "Elder Dining Hall",
+        "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+        "type": 0,
+        "date": "2022-1-14",
+        "time": "14:10",
+        "description": "",
+        "contact_info": "123-456-7890"
+    }
+]

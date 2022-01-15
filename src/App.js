@@ -26,42 +26,42 @@ const buttonStyle = {
 
 // lost: 0 , found: 1
 // const items = {
-  // posts: {
-  //   0: {
-  //     "id": 1,
-  //     "item": "water bottle",
-  //     "location": "Tech LR3",
-  //     "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg",
-  //     "type": 1
-  //   },
-  //   1: {
-  //     "id": 2,
-  //     "item": "airpods",
-  //     "location": "University Hall",
-  //     "img": "https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg",
-  //     "type": 1
-  //   },
-  //   2: {
-  //     "id": 3,
-  //     "item": "car keys",
-  //     "location": "Mudd Library",
-  //     "img": "https://s2.loli.net/2022/01/10/lFUfXvHu8Lws3oO.jpg",
-  //     "type": 1
-  //   },
-  //   3: {
-  //     "id": 4,
-  //     "item": "tennis shoes",
-  //     "location": "Henry Crown Sports Pavilion",
-  //     "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
-  //     "type": 0
-  //   },
-  //   4: {
-  //     "id": 5,
-  //     "item": "hat",
-  //     "location": "Elder Dining Hall",
-  //     "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
-  //     "type": 0
-  //   }
+// posts: {
+//   0: {
+//     "id": 1,
+//     "item": "water bottle",
+//     "location": "Tech LR3",
+//     "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg",
+//     "type": 1
+//   },
+//   1: {
+//     "id": 2,
+//     "item": "airpods",
+//     "location": "University Hall",
+//     "img": "https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg",
+//     "type": 1
+//   },
+//   2: {
+//     "id": 3,
+//     "item": "car keys",
+//     "location": "Mudd Library",
+//     "img": "https://s2.loli.net/2022/01/10/lFUfXvHu8Lws3oO.jpg",
+//     "type": 1
+//   },
+//   3: {
+//     "id": 4,
+//     "item": "tennis shoes",
+//     "location": "Henry Crown Sports Pavilion",
+//     "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+//     "type": 0
+//   },
+//   4: {
+//     "id": 5,
+//     "item": "hat",
+//     "location": "Elder Dining Hall",
+//     "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
+//     "type": 0
+//   }
 //   }
 // };
 
@@ -95,10 +95,10 @@ function App() {
           onClick={() => setItemsType(1)}> Found </Button>
         <Button sx={buttonStyle}
           onClick={() => handleMakePost()}> Post </Button>
-        <MakePost show={makePost} handleClose={handlesMakePostClose} />
+        <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
       </div>
 
-      <FoundPosts posts={data.post} itemsType={itemsType} />
+      <FoundPosts posts={data} itemsType={itemsType} />
     </div>
   );
 }
