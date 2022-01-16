@@ -46,7 +46,7 @@ const FoundPosts = ({ posts, itemsType }) => {
     const handlesShowItemClose = () => setShowItem(false);
 
     return (
-        <div style={{ marginTop: "5rem", marginLeft: "20%", marginRight: "20%" }}>
+        <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
             
             <Grid container spacing={2}>
@@ -54,7 +54,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                     .filter(post => post.type === itemsType)
                     .map((post, idx) => {
                         return (
-                            <Grid item xs={12} sm={6} md={4} key={idx}>
+                            <Grid item xs={12} sm={6} md={3} key={idx}>
                                 <ThemeProvider theme={theme}>
                                     <Card sx={{
                                         border: 1,
