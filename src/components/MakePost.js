@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import Modal from '@mui/material/Modal';
 import DateTimePicker from '@mui/lab/DateTimePicker';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { setData, updateData, getRefByPush } from '../utilities/firebase';
-
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Stack } from '@mui/material';
+import TextField from '@mui/material/TextField';
 //import TextField from '@mui/material/TextField';
 function MakePost({ show, handleClose, posts }) {
-    const [value, setValue] = useState(new Date());
-
-    const handleChange = (newValue) => {
-        setValue(newValue);
+    const spacing = 2;
+    const [dateTime, setValueDT] = useState(new Date());
+    const [lf, setLF] = React.useState('Found');
+    const handleLF = (event) => {
+        setLF(event.target.value);
+      };
+    const handleChangeDT = (newValue) => {
+        setValueDT(newValue);
     };
 
     // const createPost = async (post) => {
@@ -25,22 +37,38 @@ function MakePost({ show, handleClose, posts }) {
     //         alert(error);
     //     }
     // }
-
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '0px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
+      
     const addNewPost = (handleClose) => {
         const itemName = document.querySelector('#itemName').value;
         const location = document.querySelector('#itemLocation').value;
         const description = document.querySelector('#itemDescription').value;
-        const date = document.querySelector('#dateFound').value;
-        const time = document.querySelector('#timeFound').value;
+        const contactInfo = document.querySelector('#contactInfo').value;
+        // const date = document.querySelector('#dateFound').value;
+        // const time = document.querySelector('#timeFound').value;
         // const type = document.querySelector('#type').value;
-
+        
         const id = posts.length;
-
+        console.log(itemName, location, description, dateTime.toString(), contactInfo, lf);
         setData("/" + id + "/itemName", itemName);
         setData("/" + id + "/location", location);
         setData("/" + id + "/description", description);
-        setData("/" + id + "/time", time);
-        setData("/" + id + "/date", date);
+        // setData("/" + id + "/time", time);
+        // setData("/" + id + "/date", date);
+        const dtStr = dateTime.toString();
+        setData("/" + id + "/datetime", dtStr);
+        setData("/" + id + "/contactInfo", contactInfo);
+        setData("/" + id + "/lostOrFound", lf)
         // setData("/" + id + "/type", type);
 
         //validations
@@ -52,7 +80,57 @@ function MakePost({ show, handleClose, posts }) {
         //     createPost(post);
         //     handleClose();
     }
-
+    return (
+        <div>
+            <Modal
+                open={show}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Lost or Found Form
+                    </Typography>
+                    <Stack spacing={spacing}>
+                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" />
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Lost or Found</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={lf}
+                                defaultValue='Found'
+                                label="Lost or Found"
+                                onChange={handleLF}
+                            >
+                                <MenuItem value={'Lost'}>Lost</MenuItem>
+                                <MenuItem value={'Found'}>Found</MenuItem>
+                            </Select>
+                        </FormControl>
+                        
+                        <LocalizationProvider dateAdapter={AdapterDateFns}> 
+                            <DateTimePicker
+                                    label="Date Time Picker"
+                                    value={dateTime}
+                                    onChange={handleChangeDT}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                        </LocalizationProvider>
+                        <TextField id="itemLocation" label="Item Location" variant="outlined" />
+                        <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined"/>
+                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined"/>
+                    </Stack>
+                    <Box textAlign="right">
+                        <Button sx={ {mt: spacing} } size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
+                            Submit
+                        </Button>
+                    </Box>
+                </Box>
+            </Modal>
+        </div>
+      );
+    
     return (
         <div>
             <Modal animation={false} show={show} onHide={handleClose}>
