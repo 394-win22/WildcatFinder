@@ -14,6 +14,7 @@ import { styled, shadows } from '@mui/system';
 import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Grid from '@mui/material/Grid';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -47,20 +48,18 @@ const FoundPosts = ({ posts, itemsType }) => {
     return (
         <div style={{ marginTop: "5rem", marginLeft: "20%", marginRight: "20%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            {/* <ShowItem itemName={posts?.[getIndex]?.item} description={posts?.[getIndex]?.item} photo={posts?.[getIndex]?.img} location={posts?.[getIndex]?.location} contactInfo={"12345"}  show={showItem}
-            handleClose={handlesShowItemClose}/> */}
-            <ImageList alignItems="center" cols={3} rowHeight={1 / 5}>
+            
+            <Grid container alignitems="stretch" spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType)
                     .map((post, idx) => {
                         return (
-                            <div>
+                            <Grid item xs={2} sm={4} md={4} key={idx}>
                                 <ThemeProvider theme={theme}>
                                     <Card sx={{
                                         border: 1,
                                         borderColor: '#D6D6D6',
                                         borderRadius: 4,
-                                        m: 3,
                                         boxShadow: '2px 2px 2px 1px #D6D6D6'
                                     }}>
                                         <CardMedia
@@ -99,11 +98,11 @@ const FoundPosts = ({ posts, itemsType }) => {
 
 
 
-                            </div>
+                            </Grid>
                         )
                     })
                 }
-            </ImageList>
+            </Grid>
         </div>
     )
 };
