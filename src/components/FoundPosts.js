@@ -49,17 +49,19 @@ const FoundPosts = ({ posts, itemsType }) => {
         <div style={{ marginTop: "5rem", marginLeft: "20%", marginRight: "20%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
             
-            <Grid container alignitems="stretch" spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
+            <Grid container spacing={2}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType)
                     .map((post, idx) => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={idx}>
+                            <Grid item xs={12} sm={6} md={4} key={idx}>
                                 <ThemeProvider theme={theme}>
                                     <Card sx={{
                                         border: 1,
                                         borderColor: '#D6D6D6',
                                         borderRadius: 4,
+                                        height: '100%',
+                                        //m: 2,
                                         boxShadow: '2px 2px 2px 1px #D6D6D6'
                                     }}>
                                         <CardMedia
