@@ -93,7 +93,11 @@ function MakePost({ show, handleClose, posts }) {
             setData("/" + id + "/datetime", dtStr);
             setData("/" + id + "/contact_info", contactInfo);
             setData("/" + id + "/type", lf);
-            handleUpload();
+            if (image !== null) {
+                handleUpload();
+            } else {
+                setData("/" + id + "/img", "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png");
+            }
             handleClose();
         }
 
