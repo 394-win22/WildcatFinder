@@ -106,7 +106,7 @@ function MakePost({ show, handleClose, posts }) {
         // setData("/" + id + "/date", date);
         const dtStr = dateTime.toString();
         setData("/" + id + "/datetime", dtStr);
-        setData("/" + id + "/contactInfo", contactInfo);
+        setData("/" + id + "/contact_info", contactInfo);
         setData("/" + id + "/type", lf);
         handleUpload();
 
