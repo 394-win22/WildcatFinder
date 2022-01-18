@@ -67,7 +67,7 @@ const buttonStyle = {
 
 
 function App() {
-  const [itemsType, setItemsType] = useState(1);
+  const [itemsType, setItemsType] = useState("Found");
   const [makePost, setMakePost] = useState(false);
   const handleMakePost = () => setMakePost(true);
   const handlesMakePostClose = () => setMakePost(false);
@@ -90,9 +90,9 @@ function App() {
 
       <div>
         <Button sx={buttonStyle}
-          onClick={() => setItemsType(0)}> Lost </Button>
+          onClick={() => setItemsType("Lost")}> Lost </Button>
         <Button sx={buttonStyle}
-          onClick={() => setItemsType(1)}> Found </Button>
+          onClick={() => setItemsType("Found")}> Found </Button>
         <Button sx={buttonStyle}
           onClick={() => handleMakePost()}> Post </Button>
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />

@@ -1,10 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import firebase from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, onValue, ref, set, update, push } from 'firebase/database';
 import { useState, useEffect } from "react";
+import "firebase/storage"
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// https://firebase.google.com/docs/web/setup#available-libraries 
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,8 +23,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-const database = getDatabase(firebase);
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+export const storage = getStorage(app);
 
 export const useData = (path, transform) => {
     const [data, setData] = useState();
@@ -55,8 +59,9 @@ export const setData = (path, value) => (
 //
 export const updateData = (childRef, value) => (
     update(childRef, value)
-  );
+);
 
-  export const getRefByPush = (path) => (
+export const getRefByPush = (path) => (
     push(ref(database, path))
-  );
+);
+
