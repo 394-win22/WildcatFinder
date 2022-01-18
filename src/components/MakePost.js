@@ -160,6 +160,7 @@ function MakePost({ show, handleClose, posts }) {
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
                         <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" />
                         <input type="file" id="image_input" accept="image/png, image/jpg" onChange={handleFileChange} />
+                        {/* <progress value={progress} max="100" /> */}
                     </Stack>
                     <Box textAlign="right">
                         <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
