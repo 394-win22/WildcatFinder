@@ -22,7 +22,6 @@ function MakePost({ show, handleClose, posts }) {
     const [dateTime, setValueDT] = useState(new Date());
     const [lf, setLF] = React.useState('Found');
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [validName, setValidName] = useState(true);
     const [validLoc, setValidLoc] = useState(true);
@@ -72,8 +71,8 @@ function MakePost({ show, handleClose, posts }) {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    setUrl(url);
                     setData("/" + id + "/img", url);
+                    setImage(null);
                 });
             }
         );
@@ -85,7 +84,7 @@ function MakePost({ show, handleClose, posts }) {
         const description = document.querySelector('#itemDescription').value;
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
-        
+
         if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0) {
             setData("/" + id + "/itemName", itemName);
             setData("/" + id + "/location", location);
@@ -97,12 +96,12 @@ function MakePost({ show, handleClose, posts }) {
             handleUpload();
             handleClose();
         }
-        
+
         setValidContact(contactInfo?.length > 0);
         setValidLoc(location?.length > 0);
         setValidName(location?.length > 0);
-        
-        
+
+
 
         //validations
         //     const post = {
@@ -126,7 +125,7 @@ function MakePost({ show, handleClose, posts }) {
                         Lost or Found Form
                     </Typography>
                     <Stack spacing={spacing}>
-                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" required error={!validName} helperText="Cannot be blank"/>
+                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" required error={!validName} helperText="Cannot be blank" />
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Lost or Found</InputLabel>
                             <Select
@@ -150,9 +149,9 @@ function MakePost({ show, handleClose, posts }) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                        <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc}/>
+                        <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
-                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Cannot be blank" error={!validContact}/>
+                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Cannot be blank" error={!validContact} />
                         <input type="file" id="image_input" accept="image/png, image/jpg" onChange={handleFileChange} />
                         {/* <progress value={progress} max="100" /> */}
                     </Stack>
