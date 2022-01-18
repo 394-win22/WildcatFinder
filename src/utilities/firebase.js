@@ -5,9 +5,9 @@ import { getAnalytics } from "firebase/analytics";
 import { getDatabase, onValue, ref, set, update, push } from 'firebase/database';
 import { useState, useEffect } from "react";
 import "firebase/storage"
-import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// https://firebase.google.com/docs/web/setup#available-libraries 
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

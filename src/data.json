@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "itemName": "water bottle",
         "location": "Tech LR3",
         "img": "https://s2.loli.net/2022/01/10/PEd1Ls7ZqclvyNG.jpg",
@@ -11,7 +10,6 @@
         "contact_info": "123-456-7890"
     },
     {
-        "id": 2,
         "itemName": "airpods",
         "location": "University Hall",
         "img": "https://s2.loli.net/2022/01/10/83CuWEsaK7MZfYn.jpg",
@@ -22,7 +20,6 @@
         "contact_info": "123-456-7890"
     },
     {
-        "id": 3,
         "itemName": "car keys",
         "location": "Mudd Library",
         "img": "https://s2.loli.net/2022/01/10/lFUfXvHu8Lws3oO.jpg",
@@ -44,7 +41,6 @@
         "contact_info": "123-456-7890"
     },
     {
-        "id": 5,
         "itemName": "hat",
         "location": "Elder Dining Hall",
         "img": "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png",
