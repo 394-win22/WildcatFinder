@@ -20,10 +20,12 @@ import { storage } from '../utilities/firebase'
 function MakePost({ show, handleClose, posts }) {
     const spacing = 2;
     const [dateTime, setValueDT] = useState(new Date());
-    const [lf, setLF] = React.useState('found');
+    const [lf, setLF] = React.useState('Found');
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
+    const [validName, setValidName] = useState(true);
+    const [validLoc, setValidLoc] = useState(true);
+    const [validContact, setValidContact] = useState(true);
     const id = posts.length;
 
     const handleLF = (event) => {
@@ -39,20 +41,6 @@ function MakePost({ show, handleClose, posts }) {
         }
     };
 
-    console.log("image: ", image);
-
-    // const createPost = async (post) => {
-    //     try {
-    //         const postRef = getRefByPush(`/post`);
-    //         const postKey = postRef.key;
-    //         post = ({ ...post, 'id': postKey });
-    //         await updateData(postRef, post);
-
-
-    //     } catch (error) {
-    //         alert(error);
-    //     }
-    // }
     const style = {
         position: 'absolute',
         top: '50%',
@@ -67,9 +55,9 @@ function MakePost({ show, handleClose, posts }) {
 
     const handleUpload = () => {
         const metaData = {
-            contentType: image.type
+            contentType: image?.type
         }
-        const storageRef = sRef(storage, `images/${id}${image.name}`);
+        const storageRef = sRef(storage, `images/${id}${image?.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image, metaData);
         uploadTask.on(
             "state_changed",
@@ -83,8 +71,8 @@ function MakePost({ show, handleClose, posts }) {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    setUrl(url);
                     setData("/" + id + "/img", url);
+                    setImage(null);
                 });
             }
         );
@@ -95,20 +83,25 @@ function MakePost({ show, handleClose, posts }) {
         const location = document.querySelector('#itemLocation').value;
         const description = document.querySelector('#itemDescription').value;
         const contactInfo = document.querySelector('#contactInfo').value;
-        // const date = document.querySelector('#dateFound').value;
-        // const time = document.querySelector('#timeFound').value;
-        // const type = document.querySelector('#type').value;
-        //console.log(itemName, location, description, dateTime.toString(), contactInfo, lf);
-        setData("/" + id + "/itemName", itemName);
-        setData("/" + id + "/location", location);
-        setData("/" + id + "/description", description);
-        // setData("/" + id + "/time", time);
-        // setData("/" + id + "/date", date);
-        const dtStr = dateTime.toString();
-        setData("/" + id + "/datetime", dtStr);
-        setData("/" + id + "/contact_info", contactInfo);
-        setData("/" + id + "/type", lf);
-        handleUpload();
+        // validate
+
+        if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0) {
+            setData("/" + id + "/itemName", itemName);
+            setData("/" + id + "/location", location);
+            setData("/" + id + "/description", description);
+            const dtStr = dateTime.toString();
+            setData("/" + id + "/datetime", dtStr);
+            setData("/" + id + "/contact_info", contactInfo);
+            setData("/" + id + "/type", lf);
+            handleUpload();
+            handleClose();
+        }
+
+        setValidContact(contactInfo?.length > 0);
+        setValidLoc(location?.length > 0);
+        setValidName(location?.length > 0);
+
+
 
         //validations
         //     const post = {
@@ -132,7 +125,7 @@ function MakePost({ show, handleClose, posts }) {
                         Lost or Found Form
                     </Typography>
                     <Stack spacing={spacing}>
-                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" />
+                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" required error={!validName} helperText="Cannot be blank" />
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Lost or Found</InputLabel>
                             <Select
@@ -156,9 +149,9 @@ function MakePost({ show, handleClose, posts }) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                        <TextField id="itemLocation" label="Item Location" variant="outlined" />
+                        <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
-                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" />
+                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Cannot be blank" error={!validContact} />
                         <input type="file" id="image_input" accept="image/png, image/jpg" onChange={handleFileChange} />
                         {/* <progress value={progress} max="100" /> */}
                     </Stack>
@@ -171,71 +164,6 @@ function MakePost({ show, handleClose, posts }) {
             </Modal>
         </div>
     );
-
-    // return (
-    //     <div>
-    //         <Modal animation={false} show={show} onHide={handleClose}>
-    //             <Modal.Header>
-    //                 <Modal.Title>Found Item</Modal.Title>
-    //             </Modal.Header>
-    //             <Modal.Body>
-    //                 <form>
-    //                     <div>
-    //                         <h4>Item Name: </h4>
-    //                         <input type="text" id='itemName' name="name" />
-    //                     </div>
-    //                     <div>
-    //                         <h4>Date and time found: </h4>
-    //                         {/* <LocalizationProvider dateAdapter={AdapterDateFns}> 
-    //                                 <DateTimePicker
-    //                                         label="Date Time Picker"
-    //                                         value={value}
-    //                                         onChange={handleChange}
-    //                                         renderInput={(params) => <TextField {...params} />}
-    //                                     />
-    //                             </LocalizationProvider> */}
-
-    //                         <input type="date" id="dateFound" name="date_found" />
-    //                         <input type="time" id="timeFound" name="time_found" />
-    //                     </div>
-
-    //                     <div>
-    //                         <h4>Current Item Location: </h4>
-    //                         <input type="text" id='itemLocation' />
-    //                     </div>
-    //                     <div>
-    //                         <h4>Item Description: </h4>
-    //                         <input type='text' id='itemDescription' name='item_description' />
-    //                     </div>
-    //                     {/* <div class="container">
-    //                         <input type="file" id="image_input" accept="image/png, image/jpg"/>
-    //                         <div id="display_image"></div>
-    //                     </div> */}
-    //                     {/* <div>
-    //                         <h4>
-    //                             <label for="left-item"> I left the item where I found it.  </label>
-    //                             <input type="checkbox" id="left-item" name="left-item" value="LeftItem" />
-    //                         </h4>
-    //                     </div>
-
-    //                     <div>
-    //                         <h4>
-    //                             <label for="found-item"> I took the item with me.  </label>
-    //                             <input type="checkbox" id="took-item" name="took-item" value="TookItem" />
-    //                         </h4> 
-    //                     </div> */}
-
-    //                 </form>
-    //             </Modal.Body>
-    //             <Modal.Footer>
-    //                 <button className='btn btn-secondary' onClick={() => addNewPost(handleClose)}>
-    //                     Submit
-    //                 </button>
-    //             </Modal.Footer>
-    //         </Modal>
-
-    //     </div>
-    // )
 };
 
 export default MakePost;
