@@ -4,7 +4,6 @@ import bottle from '../imgs/bottle.png';
 
 //Name, description, photo, location, contact
 export default function ShowItem({ post, show, handleClose }) {
-    console.log(post)
     return (
         <div>
             <Modal show={show} onHide={handleClose} animation={false}>
