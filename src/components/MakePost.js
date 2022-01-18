@@ -69,7 +69,7 @@ function MakePost({ show, handleClose, posts }) {
         const metaData = {
             contentType: image.type
         }
-        const storageRef = sRef(storage, `images/${image.name}${id}`);
+        const storageRef = sRef(storage, `images/${id}${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image, metaData);
         uploadTask.on(
             "state_changed",
