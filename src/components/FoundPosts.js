@@ -48,7 +48,7 @@ const FoundPosts = ({ posts, itemsType }) => {
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            
+
             <Grid container spacing={2}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType)
