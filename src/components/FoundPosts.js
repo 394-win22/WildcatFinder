@@ -15,6 +15,7 @@ import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
+import ShowEmailForm from './EmailForm';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -49,7 +50,8 @@ const FoundPosts = ({ posts, itemsType }) => {
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={Object.values(posts)
                 .filter(post => post.type === itemsType)[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-
+            <ShowEmailForm toEmail={Object.values(posts)
+                .filter(post => post.type === itemsType)[getIndex]?.['contact_info']} show />
             <Grid container spacing={2}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType)
