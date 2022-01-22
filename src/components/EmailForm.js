@@ -1,18 +1,19 @@
+import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import emailjs from '@emailjs/browser';
+import swal from 'sweetalert';
 
 
 
 //Name, description, photo, location, contact
 export default function ShowEmailForm({ toEmail, show, handleClose }) {
+    const [validFromEmail, setValidFromEmail] = useState(true);
+    const [validMessage, setValidMessage] = useState(true);
     const spacing = 2;
     const style = {
         position: 'absolute',
@@ -26,30 +27,36 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
         p: 4,
     };
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    }
 
     const ContactUs = (handleClose) => {
-        const toEmail = "sathu.sathvik@gmail.com" //document.querySelector('#to_email').value;
+        const toEmail   = document.querySelector('#toEmail').value;
         const fromEmail = document.querySelector('#fromEmail').value;
-        const message = document.querySelector('#message').value;  
+        const message   = document.querySelector('#message').value;  
         const params = {
             "to_email": toEmail,
             "from_email": fromEmail,
             "message_html": message,
         };
-        // const payload = {
-        //     service_id: 'service_wildcatFinder',
-        //     template_id: 'wildcatFinder',
-        //     user_id: 'sathviksathu',
-        //     template_params: params,
-        // };
         
-        emailjs.send('service_wildcatFinder', 'wildcatFinder', params, 'user_ishH85RysqiVJXw8CLgcJ')
-            .then((result) => {
-                
-                console.log(result.text);
-            }, (error) => {
-                console.log(error.text);
-            });
+        if (toEmail?.length > 0 && fromEmail?.length > 0 && validateEmail(fromEmail) && message?.length > 0) {
+            emailjs.send('service_wildcatFinder', 'wildcatFinder', params, 'user_ishH85RysqiVJXw8CLgcJ')
+                .then((result) => {
+                    swal("Message received!", "Will Reply Back Soon..", "success");
+                }, (error) => {
+                    swal("Failed", "Please try again in sometime..", "error");                    
+                });
+            handleClose()
+        }
+
+        setValidFromEmail(fromEmail?.length > 0 && validateEmail(fromEmail));
+        setValidMessage(message?.length > 0);
     };
     
     
@@ -69,8 +76,8 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                     </Typography>
                     <Stack spacing={spacing}>
                         <TextField id="toEmail" name="toEmail" label="To" variant="outlined" disabled defaultValue={toEmail}/>
-                        <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" required/>
-                        <TextField id='message' label="Message" name='msg' variant="outlined" required helperText="Cannot be blank" />
+                        <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" required helperText='Must be valid email' error={!validFromEmail} />
+                        <TextField id='message' label="Message" name='msg' variant="outlined" required helperText="Cannot be blank" error={!validMessage} />
                         
                     </Stack>
                     <Box textAlign="right">
