@@ -15,6 +15,7 @@ import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
+import ShowEmailForm from './EmailForm';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -37,7 +38,14 @@ const theme = createTheme({
 
 const FoundPosts = ({ posts, itemsType }) => {
     const [showItem, setShowItem] = useState(false);
+    const [showEmailForm, setShowEmailForm] = useState(false);
     const [getIndex, setIndex] = useState();
+    
+    const handleShowEmailForm = (idx) => {
+        setIndex(idx);
+        setShowEmailForm(true);
+    };
+    const handleShowEmailFormClose = () => setShowEmailForm(false);
 
     const handleShowItem = (idx) => {
         setIndex(idx);
@@ -49,7 +57,8 @@ const FoundPosts = ({ posts, itemsType }) => {
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={Object.values(posts)
                 .filter(post => post.type === itemsType)[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-
+            <ShowEmailForm toEmail={Object.values(posts)
+                .filter(post => post.type === itemsType)[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType)
@@ -93,6 +102,9 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         <CardActions sx={{ p: 0 }}>
                                             <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
                                                 <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
+                                            </Box>
+                                            <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
+                                                <Button onClick={(e) => handleShowEmailForm(idx)}>Send Email</Button>
                                             </Box>
 
                                         </CardActions>
