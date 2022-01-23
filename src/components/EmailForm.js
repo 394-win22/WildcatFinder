@@ -66,7 +66,11 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
         <div>
             <Modal
                 open={show}
-                onClose={handleClose}
+                onClose={() => {
+                    handleClose();
+                    setValidFromEmail(true);
+                    setValidMessage(true);
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >

@@ -78,6 +78,14 @@ function MakePost({ show, handleClose, posts }) {
         );
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    }
+
     const addNewPost = (handleClose) => {
         const itemName = document.querySelector('#itemName').value;
         const location = document.querySelector('#itemLocation').value;
@@ -85,7 +93,7 @@ function MakePost({ show, handleClose, posts }) {
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
 
-        if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0) {
+        if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 && validateEmail(contactInfo)) {
             setData("/" + id + "/itemName", itemName);
             setData("/" + id + "/location", location);
             setData("/" + id + "/description", description);
@@ -101,7 +109,7 @@ function MakePost({ show, handleClose, posts }) {
             handleClose();
         }
 
-        setValidContact(contactInfo?.length > 0);
+        setValidContact(contactInfo?.length > 0 && validateEmail(contactInfo));
         setValidLoc(location?.length > 0);
         setValidName(location?.length > 0);
 
@@ -120,7 +128,12 @@ function MakePost({ show, handleClose, posts }) {
         <div>
             <Modal
                 open={show}
-                onClose={handleClose}
+                onClose={() => {
+                    handleClose();
+                    setValidContact(true);
+                    setValidLoc(true);
+                    setValidName(true);
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -155,7 +168,7 @@ function MakePost({ show, handleClose, posts }) {
                         </LocalizationProvider>
                         <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
-                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Cannot be blank" error={!validContact} />
+                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Must be valid email" error={!validContact} />
                         <input type="file" id="image_input" accept="image/png, image/jpg" onChange={handleFileChange} />
                         {/* <progress value={progress} max="100" /> */}
                     </Stack>
