@@ -58,7 +58,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                 .filter(post => post.type === itemsType)[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
                 {Object.values(posts)
-                    .filter(post => post.type === itemsType)
+                    .filter(post => post.type === itemsType).reverse()
                     .map((post, idx) => {
                         return (
                             <Grid item xs={12} sm={6} md={3} key={idx}>

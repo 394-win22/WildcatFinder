@@ -136,6 +136,7 @@ function MakePost({ show, handleClose, posts }) {
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                style={{ overflow: 'scroll' }}
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: "center", marginBottom: 10}}>
