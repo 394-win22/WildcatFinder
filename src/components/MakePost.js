@@ -176,6 +176,9 @@ function MakePost({ show, handleClose, posts }) {
                         <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
                             Submit
                         </Button>
+                        <Button sx={{ mt: spacing, marginLeft: "5%"}} size="small" variant="outlined" onClick={() => handleClose()}>
+                            Close
+                        </Button>
                     </Box>
                 </Box>
             </Modal>

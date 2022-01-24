@@ -100,7 +100,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                                             </ThemeProvider>
                                         </CardContent>
                                         <CardActions sx={{ p: 0 }}>
-                                            <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
+                                            <Box sx={{ marginLeft: "25%", marginRight: 1 }}>
                                                 <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
                                             </Box>
                                             <Box sx={{ marginLeft: "auto", marginRight: 1 }}>

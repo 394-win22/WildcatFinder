@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import bottle from '../imgs/bottle.png';
 
 //Name, description, photo, location, contact
 export default function ShowItem({ post, show, handleClose }) {

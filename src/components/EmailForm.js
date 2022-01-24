@@ -88,6 +88,9 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                         <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => ContactUs(handleClose)}>
                             Submit
                         </Button>
+                        <Button sx={{ mt: spacing, marginLeft: "5%"}} size="small" variant="outlined" onClick={() => handleClose()}>
+                            Close
+                        </Button>
                     </Box>
                 </Box>
             </Modal>
