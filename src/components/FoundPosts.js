@@ -1,7 +1,4 @@
 // collection of posts
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import React, { useState } from 'react';
 import ShowItem from './Item';
 import Card from '@mui/material/Card';

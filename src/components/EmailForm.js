@@ -75,8 +75,8 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Lost or Found Form
+                    <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: "center", marginBottom: 10}}>
+                        Email Now
                     </Typography>
                     <Stack spacing={spacing}>
                         <TextField id="toEmail" name="toEmail" label="To" variant="outlined" disabled defaultValue={toEmail}/>

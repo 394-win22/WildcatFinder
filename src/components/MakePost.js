@@ -138,7 +138,7 @@ function MakePost({ show, handleClose, posts }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: "center", marginBottom: 10}}>
                         Lost or Found Form
                     </Typography>
                     <Stack spacing={spacing}>
