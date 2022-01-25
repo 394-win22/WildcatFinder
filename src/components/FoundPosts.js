@@ -49,19 +49,18 @@ const FoundPosts = ({ posts, itemsType }) => {
         setShowItem(true);
     };
     const handlesShowItemClose = () => setShowItem(false);
-
+    console.log('%%%%%%')
+    console.log(Object.entries(posts).filter(post => post[1].type === itemsType)
+                .map(post => post[0]))
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
-            <ShowItem post={Object.values(posts)
-                .filter(post => post.type === itemsType).reverse()[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            <ShowEmailForm toEmail={Object.values(posts)
-                .filter(post => post.type === itemsType).reverse()[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+            <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
+            <ShowEmailForm toEmail={posts[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
-                {Object.values(posts)
-                    .filter(post => post.type === itemsType).reverse()
-                    .map((post, idx) => {
+                {Object.entries(posts).reverse().filter(post => post[1].type === itemsType)
+                .map(post => {
                         return (
-                            <Grid item xs={12} sm={6} md={3} key={idx}>
+                            <Grid item xs={12} sm={6} md={3} key={post[0]}>
                                 <ThemeProvider theme={theme}>
                                     <Card sx={{
                                         border: 1,
@@ -75,7 +74,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                                             component="img"
                                             height="150"
                                             width="100%"
-                                            image={post?.img}
+                                            image={post[1]?.img}
                                         />
                                         <CardContent sx={{
                                             pt: 1,
@@ -83,7 +82,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         }}>
                                             <ThemeProvider theme={theme}>
                                                 <Typography gutterBottom variant="h6" component="div">
-                                                    {post?.itemName}
+                                                    {post[1]?.itemName}
                                                 </Typography>
                                             </ThemeProvider>
                                             <ThemeProvider theme={theme}>
@@ -92,16 +91,16 @@ const FoundPosts = ({ posts, itemsType }) => {
                                                         mr: 1,
                                                         mb: 1
                                                     }} />
-                                                    {post.location}
+                                                    {post[1].location}
                                                 </Typography>
                                             </ThemeProvider>
                                         </CardContent>
                                         <CardActions sx={{ p: 0 }}>
                                             <Box sx={{ marginLeft: "25%", marginRight: 1 }}>
-                                                <Button onClick={(e) => handleShowItem(idx)}>See More</Button>
+                                                <Button onClick={(e) => handleShowItem(post[0])}>See More</Button>
                                             </Box>
                                             <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
-                                                <Button onClick={(e) => handleShowEmailForm(idx)}>Send Email</Button>
+                                                <Button onClick={(e) => handleShowEmailForm(post[0])}>Send Email</Button>
                                             </Box>
 
                                         </CardActions>
