@@ -97,6 +97,9 @@ function MakePost({ show, handleClose, posts }) {
         // validate
 
         if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 && validateEmail(contactInfo)) {
+            const newRef = getRefByPush('/');
+            newRef.set({itemName: '{{itemName}}'});
+            
             setData("/" + id + "/itemName", itemName);
             setData("/" + id + "/location", location);
             setData("/" + id + "/description", description);
