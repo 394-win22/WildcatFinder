@@ -26,7 +26,7 @@ function MakePost({ show, handleClose, posts }) {
     const [validName, setValidName] = useState(true);
     const [validLoc, setValidLoc] = useState(true);
     const [validContact, setValidContact] = useState(true);
-    const id = posts.length;
+    const id = getRefByPush('/');
 
     const handleLF = (event) => {
         setLF(event.target.value);
@@ -97,8 +97,8 @@ function MakePost({ show, handleClose, posts }) {
         // validate
 
         if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 && validateEmail(contactInfo)) {
-            const newRef = getRefByPush('/');
-            newRef.set({itemName: '{{itemName}}'});
+            console.log('we here')
+            
             
             setData("/" + id + "/itemName", itemName);
             setData("/" + id + "/location", location);

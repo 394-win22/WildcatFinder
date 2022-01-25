@@ -62,6 +62,6 @@ export const updateData = (childRef, value) => (
 );
 
 export const getRefByPush = (path) => (
-    push(ref(database, path))
+    push(ref(database, path)).key
 );
 
