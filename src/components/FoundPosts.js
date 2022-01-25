@@ -1,7 +1,4 @@
 // collection of posts
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import React, { useState } from 'react';
 import ShowItem from './Item';
 import Card from '@mui/material/Card';
@@ -56,9 +53,9 @@ const FoundPosts = ({ posts, itemsType }) => {
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={Object.values(posts)
-                .filter(post => post.type === itemsType)[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
+                .filter(post => post.type === itemsType).reverse()[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
             <ShowEmailForm toEmail={Object.values(posts)
-                .filter(post => post.type === itemsType)[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+                .filter(post => post.type === itemsType).reverse()[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
                 {Object.values(posts)
                     .filter(post => post.type === itemsType).reverse()
