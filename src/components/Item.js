@@ -36,7 +36,7 @@ export default function ShowItem({ post, show, handleClose }) {
                     </Typography>
                     <Stack spacing={2}>
 {/*                         <Typography id="modal-modal-title" variant="subtitle1" component="h1">
-                            Name of Item
+                            Name of Item. 
                         </Typography>
                         <TextField  id="filled-read-only-input"
                                     label="Name"

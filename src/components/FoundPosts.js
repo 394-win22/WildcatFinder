@@ -80,7 +80,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         />
                                         <CardContent sx={{
                                             pt: 1,
-                                            pb: 0
+                                            pb: 0,
                                         }}>
                                             <ThemeProvider theme={theme}>
                                                 <Typography gutterBottom variant="h6" component="div">
