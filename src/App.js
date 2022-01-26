@@ -4,7 +4,8 @@ import FoundPosts from './components/FoundPosts'
 import Button from "@mui/material/Button";
 import MakePost from './components/MakePost'
 import React, { useEffect, useState } from 'react';
-import { useData } from './utilities/firebase.js';
+import { useData } from './utilities/firebase';
+import { SignInOut } from './components/LogInButtons';
 
 const Title = {
   title: "WildcatFinder",
@@ -31,7 +32,6 @@ function App() {
   const [makePost, setMakePost] = useState(false);
   const handleMakePost = () => setMakePost(true);
   const handlesMakePostClose = () => setMakePost(false);
-
   const [data, loadingData, errorData] = useData("/");
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function App() {
         subtitle={Title.subtitle}
         descriptionLine={Title.descriptionLine}
       />
-
+      
       <div>
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Lost")}> Lost </Button>
@@ -55,6 +55,8 @@ function App() {
           onClick={() => setItemsType("Found")}> Found </Button>
         <Button sx={buttonStyle}
           onClick={() => handleMakePost()}> Post </Button>
+        <SignInOut/>
+      
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
       </div>
 
