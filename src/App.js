@@ -6,6 +6,8 @@ import MakePost from './components/MakePost'
 import React, { useEffect, useState } from 'react';
 import { useData } from './utilities/firebase';
 import { SignInOut } from './components/LogInButtons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
 const Title = {
   title: "WildcatFinder",
@@ -47,16 +49,14 @@ function App() {
         subtitle={Title.subtitle}
         descriptionLine={Title.descriptionLine}
       />
-      
-      <div>
+      <SignInOut />
+
+      <div className="bottom-banner">
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Lost")}> Lost </Button>
+        <FontAwesomeIcon icon={faPlusSquare} size="lg" onClick={() => handleMakePost()} />
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Found")}> Found </Button>
-        <Button sx={buttonStyle}
-          onClick={() => handleMakePost()}> Post </Button>
-        <SignInOut/>
-      
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
       </div>
 
