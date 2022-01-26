@@ -15,6 +15,9 @@ import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { ref as sRef, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { storage } from '../utilities/firebase'
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { styled } from '@mui/material/styles';
 
 //import TextField from '@mui/material/TextField';
 function MakePost({ show, handleClose, posts }) {
@@ -40,6 +43,10 @@ function MakePost({ show, handleClose, posts }) {
             setImage(e.target.files[0]);
         }
     };
+
+    const Input = styled('input')({
+        display: 'none',
+    });
 
     const style = {
         position: 'absolute',
@@ -176,10 +183,22 @@ function MakePost({ show, handleClose, posts }) {
                         <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
                         <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Must be valid email" error={!validContact} />
-                        <input type="file" id="image_input" accept="image/png, image/jpg" onChange={handleFileChange} />
-                        {/* <progress value={progress} max="100" /> */}
+                        <Box textAlign="center">
+                            <label htmlFor="contained-button-file">
+                                <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleFileChange}/>
+                                <Button variant="contained" component="span">
+                                    Upload
+                                </Button>
+                            </label>
+                            <label htmlFor="icon-button-file">
+                                <Input accept="image/*" id="icon-button-file" type="file" onChange={handleFileChange}/>
+                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
+                            </label>
+                        </Box>
                     </Stack>
-                    <Box textAlign="right">
+                    <Box textAlign="right" marginTop={2}>
                         <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
                             Submit
                         </Button>
