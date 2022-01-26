@@ -53,10 +53,11 @@ const FoundPosts = ({ posts, itemsType }) => {
     console.log('%%%%%%')
     console.log(Object.entries(posts).filter(post => post[1].type === itemsType)
                 .map(post => post[0]))
+    const allEmails = Object.entries(posts).map(post => post[1].contact_info)
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            <ShowEmailForm toEmail={posts[getIndex]?.['contact_info']} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+            <ShowEmailForm toEmail={allEmails[getIndex]} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
                 {Object.entries(posts).reverse().filter(post => post[1].type === itemsType)
                 .map(post => {

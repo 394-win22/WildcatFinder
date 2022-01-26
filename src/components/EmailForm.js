@@ -35,8 +35,7 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
         );
     }
 
-    const ContactUs = (handleClose) => {
-        const toEmail   = document.querySelector('#toEmail').value;
+    const ContactUs = (toEmail, handleClose) => {
         const fromEmail = document.querySelector('#fromEmail').value;
         const message   = document.querySelector('#message').value;  
         const params = {
@@ -80,13 +79,12 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                         Email Now
                     </Typography>
                     <Stack spacing={spacing}>
-                        <TextField id="toEmail" name="toEmail" label="To" variant="outlined" disabled defaultValue={toEmail}/>
                         <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" required helperText='Must be valid email' error={!validFromEmail} />
                         <TextField id='message' label="Message" name='msg' variant="outlined" required helperText="Cannot be blank" error={!validMessage} />
                         
                     </Stack>
                     <Box textAlign="right">
-                        <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => ContactUs(handleClose)}>
+                        <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => ContactUs(toEmail, handleClose)}>
                             Submit
                         </Button>
                         <Button sx={{ mt: spacing, marginLeft: "5%"}} size="small" variant="outlined" onClick={() => handleClose()}>
