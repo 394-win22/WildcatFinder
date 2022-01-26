@@ -51,6 +51,8 @@ function App() {
       />
       <SignInOut />
 
+
+      <FoundPosts posts={data} itemsType={itemsType} />
       <div className="bottom-banner">
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Lost")}> Lost </Button>
@@ -60,7 +62,6 @@ function App() {
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
       </div>
 
-      <FoundPosts posts={data} itemsType={itemsType} />
     </div>
   );
 }
