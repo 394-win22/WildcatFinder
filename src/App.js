@@ -20,7 +20,10 @@ const buttonStyle = {
   color: "rgb(255, 255, 255)",
   '&:hover': {
     bgcolor: "rgba(129,182,239,0.95)"
-  }
+  },
+  '&:focus': {
+    bgcolor: "rgba(129,182,239,0.95)"
+  },
 }
 
 function App() {

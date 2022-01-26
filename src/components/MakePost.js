@@ -126,16 +126,6 @@ function MakePost({ show, handleClose, posts }) {
         setValidLoc(location?.length > 0);
         setValidName(location?.length > 0);
 
-
-
-        //validations
-        //     const post = {
-        //         "description": description,
-        //         "item": itemName,
-        //         "date": date
-        //     }
-        //     createPost(post);
-        //     handleClose();
     }
     return (
         <div>
