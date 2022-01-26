@@ -53,6 +53,7 @@ function App() {
 
 
       <FoundPosts posts={data} itemsType={itemsType} />
+
       <div className="bottom-banner">
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Lost")}> Lost </Button>
