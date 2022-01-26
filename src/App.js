@@ -16,8 +16,8 @@ const Title = {
 }
 
 const buttonStyle = {
-  mx: 2,
-  width: 1 / 14,
+  width: 1,
+  height: 1,
   bgcolor: "rgba(28,133,255,0.95)",
   borderRadius: 2,
   color: "rgb(255, 255, 255)",
@@ -57,7 +57,7 @@ function App() {
       <div className="bottom-banner">
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Lost")}> Lost </Button>
-        <FontAwesomeIcon icon={faPlusSquare} size="lg" onClick={() => handleMakePost()} />
+        <FontAwesomeIcon className="plus-icon" icon={faPlusSquare} color="white" size="3x" onClick={() => handleMakePost()} />
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Found")}> Found </Button>
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
