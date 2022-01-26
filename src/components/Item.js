@@ -35,7 +35,7 @@ export default function ShowItem({ post, show, handleClose }) {
                         Details of Lost Items
                     </Typography>
                     <Stack spacing={2}>
-                        <Typography id="modal-modal-title" variant="subtitle1" component="h1">
+{/*                         <Typography id="modal-modal-title" variant="subtitle1" component="h1">
                             Name of Item
                         </Typography>
                         <TextField  id="filled-read-only-input"
@@ -44,20 +44,19 @@ export default function ShowItem({ post, show, handleClose }) {
                                     InputProps={{
                                         readOnly: true,
                                     }}
-                                    variant="filled" />
+                                    variant="filled" /> */}
 
                         <Typography id="modal-modal-title" variant="subtitle1" component="h1">
                             Description
                         </Typography>
                         <TextField  id="filled-read-only-input"
-                                    label="Description"
                                     defaultValue= {post?.description}
                                     InputProps={{
                                         readOnly: true,
                                     }}
                                     variant="filled" />
 
-                        <Typography id="modal-modal-title" variant="subtitle1" component="h1">
+                        {/* <Typography id="modal-modal-title" variant="subtitle1" component="h1">
                             Location
                         </Typography>
                         <TextField  id="filled-read-only-input"
@@ -77,8 +76,8 @@ export default function ShowItem({ post, show, handleClose }) {
                                     InputProps={{
                                         readOnly: true,
                                     }}
-                                    variant="filled" />
-                        <img alt="ItemsImage" src={post?.img} width="100%" />
+                                    variant="filled" /> */}
+{/*                         <img alt="ItemsImage" src={post?.img} width="100%" /> */}
                     </Stack>
                     <Box textAlign="right">
                         <Button sx={{ mt: 2, marginLeft: "5%"}} size="small" variant="outlined" onClick={() => handleClose()}>

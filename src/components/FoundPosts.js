@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
+import Resizer from "react-image-file-resizer";
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -68,12 +69,13 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         borderRadius: 4,
                                         height: '100%',
                                         //m: 2,
-                                        boxShadow: '2px 2px 2px 1px #D6D6D6'
+                                        boxShadow: '2px 2px 2px 1px #D6D6D6',
+                                        p: 3
                                     }}>
                                         <CardMedia
                                             component="img"
-                                            height="150"
-                                            width="100%"
+                                            height="180"
+                                            width="auto"
                                             image={post[1]?.img}
                                         />
                                         <CardContent sx={{
