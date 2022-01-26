@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
-import Resizer from "react-image-file-resizer";
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -29,7 +28,19 @@ const theme = createTheme({
             'Inter',
             'sans-serif',
         ].join(','),
-        subtitle: { fontWeight: 500 },
+        subtitle: {
+            fontWeight: 500,
+            fontSize: '1.25rem',
+            '@media(max-width:800px)': {
+                fontSize: '.75rem',
+            }
+        },
+        h6: {
+            fontSize: '1.5rem',
+            '@media(max-width:800px)': {
+                fontSize: '1rem',
+            }
+        },
     },
 });
 
@@ -62,7 +73,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                 {Object.entries(posts).reverse().filter(post => post[1].type === itemsType)
                 .map(post => {
                         return (
-                            <Grid item xs={12} sm={6} md={3} key={post[0]}>
+                            <Grid item xs={6} sm={4} md={3} key={post[0]}>
                                 <ThemeProvider theme={theme}>
                                     <Card sx={{
                                         border: 1,
@@ -99,10 +110,10 @@ const FoundPosts = ({ posts, itemsType }) => {
                                             </ThemeProvider>
                                         </CardContent>
                                         <CardActions sx={{ p: 0 }}>
-                                            <Box sx={{ marginLeft: "25%", marginRight: 1 }}>
+                                            <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
                                                 <Button onClick={(e) => handleShowItem(post[0])}>See More</Button>
                                             </Box>
-                                            <Box sx={{ marginLeft: "auto", marginRight: 1 }}>
+                                            <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
                                                 <Button onClick={(e) => handleShowEmailForm(post[0])}>Send Email</Button>
                                             </Box>
 
