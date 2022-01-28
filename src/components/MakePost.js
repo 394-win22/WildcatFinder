@@ -18,10 +18,13 @@ import { storage } from '../utilities/firebase'
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
+import { useUserState } from '../utilities/firebase';
+
 
 //import TextField from '@mui/material/TextField';
-function MakePost({ show, handleClose, posts }) {
+function MakePost({ show, handleClose, posts}) {
     const spacing = 2;
+    const [user] = useUserState();
     const [dateTime, setValueDT] = useState(new Date());
     const [lf, setLF] = React.useState('Found');
     const [image, setImage] = useState(null);
@@ -30,7 +33,6 @@ function MakePost({ show, handleClose, posts }) {
     const [validLoc, setValidLoc] = useState(true);
     const [validContact, setValidContact] = useState(true);
     const id = getRefByPush('/');
-
     const handleLF = (event) => {
         setLF(event.target.value);
     };
@@ -88,13 +90,13 @@ function MakePost({ show, handleClose, posts }) {
         );
     }
 
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-    }
+    // const validateEmail = (email) => {
+    //     return String(email)
+    //         .toLowerCase()
+    //         .match(
+    //         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //     );
+    // }
 
     const addNewPost = (handleClose) => {
         const itemName = document.querySelector('#itemName').value;
@@ -103,7 +105,7 @@ function MakePost({ show, handleClose, posts }) {
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
 
-        if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 && validateEmail(contactInfo)) {
+        if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 /*&& validateEmail(contactInfo)*/) {
             console.log('we here')
             
             
@@ -114,6 +116,7 @@ function MakePost({ show, handleClose, posts }) {
             setData("/" + id + "/datetime", dtStr);
             setData("/" + id + "/contact_info", contactInfo);
             setData("/" + id + "/type", lf);
+            setData("/" + id + "/user_id", user['email']);
             if (image !== null) {
                 handleUpload();
             } else {
@@ -122,7 +125,7 @@ function MakePost({ show, handleClose, posts }) {
             handleClose();
         }
 
-        setValidContact(contactInfo?.length > 0 && validateEmail(contactInfo));
+        setValidContact(contactInfo?.length > 0 ) ;//&& validateEmail(contactInfo));
         setValidLoc(location?.length > 0);
         setValidName(location?.length > 0);
 
@@ -172,7 +175,7 @@ function MakePost({ show, handleClose, posts }) {
                         </LocalizationProvider>
                         <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
                         <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
-                        <TextField id='contactInfo' label="Contact Information" name='contact_info' variant="outlined" required helperText="Must be valid email" error={!validContact} />
+                        <TextField id='contactInfo' label="Contact Information" name='contact_info'  defaultValue = {user?user['email']:""} variant="outlined"  />
                         <Box textAlign="center">
                             <label htmlFor="contained-button-file">
                                 <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleFileChange}/>
