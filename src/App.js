@@ -7,8 +7,10 @@ import React, { useEffect, useState } from 'react';
 import { useData } from './utilities/firebase';
 import { SignInOut } from './components/LogInButtons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare, faMinusSquare} from '@fortawesome/free-solid-svg-icons'
 import { signInWithGoogle, useUserState } from './utilities/firebase';
+import { MyPosts } from'./components/MyPosts'
+
 const Title = {
   title: "WildcatFinder",
   subtitle: "Lost & Found",
@@ -36,9 +38,11 @@ function App() {
   const handleMakePost = () => setMakePost(true);
   const handlesMakePostClose = () => setMakePost(false);
   const [data, loadingData, errorData] = useData("/");
+  const [post, setPost] = useState(null);
 
   useEffect(() => {
     if (data === undefined) return;
+     setPost(data);
   }, [data])
 
   if (errorData) return <h1>{errorData}</h1>;
@@ -51,9 +55,10 @@ function App() {
         descriptionLine={Title.descriptionLine}
       />
       <SignInOut />
-
+      <MyPosts posts={post} setPost={setPost}/>
+      
       <div className="FoundPosts">
-        <FoundPosts posts={data} itemsType={itemsType} />
+        <FoundPosts posts={post} itemsType={itemsType} />
       </div>
       <div className="bottom-banner">
         <Button sx={buttonStyle}
@@ -61,7 +66,7 @@ function App() {
         <FontAwesomeIcon className="plus-icon" icon={faPlusSquare} color="white" size="3x" onClick={() => user === null ? signInWithGoogle() : handleMakePost()} />
         <Button sx={buttonStyle}
           onClick={() => setItemsType("Found")}> Found </Button>
-        <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
+        <MakePost show={makePost} handleClose={handlesMakePostClose} posts={post} />
       </div>
 
     </div>
