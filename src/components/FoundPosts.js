@@ -49,6 +49,9 @@ const FoundPosts = ({ posts, itemsType }) => {
     const [showItem, setShowItem] = useState(false);
     const [showEmailForm, setShowEmailForm] = useState(false);
     const [getIndex, setIndex] = useState();
+
+    // search
+    const [searchTerm, setSearchTerm] = useState("");
     
     const handleShowEmailForm = (idx) => {
         setIndex(idx);
@@ -66,12 +69,21 @@ const FoundPosts = ({ posts, itemsType }) => {
                 .map(post => post[0]))
     const allEmails = Object.entries(posts).map(post => post[1].contact_info)
     return (
+        <div>
+            <input
+            type="text"
+            placeholder="Seach for your item here"
+            onChange={(event) => {
+                setSearchTerm(event.target.value)
+            }} />
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
             <ShowEmailForm toEmail={allEmails[getIndex]} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
-                {Object.entries(posts).reverse().filter(post => post[1].type === itemsType)
-                .map(post => {
+                {Object.entries(posts).reverse()
+                .filter(post => post[1].type === itemsType)
+                .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map(post => {  
                         return (
                             <Grid item xs={6} sm={4} md={3} key={post[0]}>
                                 <ThemeProvider theme={theme}>
@@ -128,6 +140,7 @@ const FoundPosts = ({ posts, itemsType }) => {
                     })
                 }
             </Grid>
+        </div>
         </div>
     )
 };
