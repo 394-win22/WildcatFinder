@@ -17,19 +17,21 @@ const Title = {
   descriptionLine: "Reporting lost items today!"
 }
 
-const buttonStyle = {
-  width: 1,
-  height: 1,
-  bgcolor: "rgba(28,133,255,0.95)",
-  borderRadius: 2,
-  color: "rgb(255, 255, 255)",
-  '&:hover': {
-    bgcolor: "rgba(129,182,239,0.95)"
-  },
-  '&:focus': {
-    bgcolor: "rgba(129,182,239,0.95)"
-  },
-}
+const buttonStyle = (selected) => {
+  return (
+    {
+      width: 1,
+      height: 1,
+      bgcolor: selected ? "rgba(14,86,171,0.95)" : "rgba(28,133,255,0.95)",
+      borderRadius: 2,
+      color: "rgb(255, 255, 255)",
+      '&:hover': {
+        bgcolor: selected ? "rgba(109,153,200,0.95)" : "rgba(129,182,239,0.95)"
+      },
+      // '&:focus': {
+      //   bgcolor: "rgba(129,182,239,0.95)"
+    // },
+})}
 
 function App() {
   const [user] = useUserState();
@@ -61,7 +63,7 @@ function App() {
         <FoundPosts posts={post} itemsType={itemsType} />
       </div>
       <div className="bottom-banner">
-        <Button sx={buttonStyle}
+        <Button sx={buttonStyle(itemsType=="Lost")}
           onClick={() => setItemsType("Lost")}> Lost </Button>
         <FontAwesomeIcon className="plus-icon" icon={faPlusSquare} color="white" size="3x" onClick={() => user === null ? signInWithGoogle() : handleMakePost()} />
         <Button sx={buttonStyle}
