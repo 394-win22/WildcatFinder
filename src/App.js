@@ -55,7 +55,7 @@ function App() {
         descriptionLine={Title.descriptionLine}
       />
       <SignInOut />
-      <MyPosts posts={post} setPost={setPost}/>
+      <MyPosts posts={data} setPost={setPost}/>
       
       <div className="FoundPosts">
         <FoundPosts posts={post} itemsType={itemsType} />

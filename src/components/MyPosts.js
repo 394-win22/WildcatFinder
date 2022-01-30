@@ -17,15 +17,22 @@ const buttonStyle = {
       bgcolor: "rgba(129,182,239,0.95)"
     },
   }
-const handleMyPosts = ( user, posts, setPost)=>{
-
-  let myPosts = Object.values(posts).filter(post => post['user_id'] === user['email']);
-  setPost(myPosts);
+const handleMyPosts = ( user, posts, setPost,clicked,setClicked)=>{
+  if(!clicked){
+    let myPosts = Object.values(posts).filter(post => post['user_id'] === user['email']);
+    setPost(myPosts);
+    setClicked(true);
+  }
+  else{
+    setPost(posts);
+    setClicked(false);
+  }
 }
 export const MyPosts = ( {posts , setPost} )=>{
     const [user] = useUserState();
+    const [clicked,setClicked] = useState(false);
     return ( 
-        <Button sx={buttonStyle} onClick={() => user === null ? signInWithGoogle() : handleMyPosts(user, posts, setPost)}> 
+        <Button sx={buttonStyle} onClick={() => user === null ? signInWithGoogle() : handleMyPosts(user, posts, setPost,clicked,setClicked)}> 
           My Posts 
         </Button>
         
