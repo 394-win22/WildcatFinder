@@ -13,8 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
-import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -46,9 +44,6 @@ const theme = createTheme({
     },
 });
 
-const searchStyle = {
-    width: "50vw"
-}
 
 const FoundPosts = ({ posts, itemsType }) => {
     const [showItem, setShowItem] = useState(false);
@@ -69,91 +64,83 @@ const FoundPosts = ({ posts, itemsType }) => {
         setShowItem(true);
     };
     const handlesShowItemClose = () => setShowItem(false);
-    // console.log('%%%%%%')
-    // console.log(Object.entries(posts).filter(post => post[1].type === itemsType)
-    //             .map(post => post[0]))
+    console.log('%%%%%%')
+    console.log(Object.entries(posts).filter(post => post[1].type === itemsType)
+                .map(post => post[0]))
     const allEmails = Object.entries(posts).map(post => post[1].contact_info)
     return (
         <div>
-            <TextField
-            sx={searchStyle}
+            <input
             type="text"
-            label={null}
-            InputLabelProps={{
-                shrink: false
-            }}
-            InputProps={{
-                endAdornment: <SearchIcon />,
-            }}
             placeholder="Seach for your item here"
             onChange={(event) => {
                 setSearchTerm(event.target.value)
             }} />
-            <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
-                <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-                <ShowEmailForm toEmail={allEmails[getIndex]} show={showEmailForm} handleClose={handleShowEmailFormClose} />
-                <Grid container spacing={2}>
-                    {Object.entries(posts).reverse()
-                    .filter(post => post[1].type === itemsType)
-                    .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()))
-                    .map(post => {  
-                            return (
-                                <Grid item xs={6} sm={4} md={3} key={post[0]}>
-                                    <ThemeProvider theme={theme}>
-                                        <Card sx={{
-                                            border: 1,
-                                            borderColor: '#D6D6D6',
-                                            borderRadius: 4,
-                                            height: '100%',
-                                            //m: 2,
-                                            boxShadow: '2px 2px 2px 1px #D6D6D6',
-                                            p: 3
+        <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
+            <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
+            <ShowEmailForm toEmail={allEmails[getIndex]} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+            <Grid container spacing={2}>
+                {Object.entries(posts).reverse()
+                .filter(post => post[1].type === itemsType)
+                .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map(post => {  
+                        return (
+                            <Grid item xs={6} sm={4} md={3} key={post[0]}>
+                                <ThemeProvider theme={theme}>
+                                    <Card sx={{
+                                        border: 1,
+                                        borderColor: '#D6D6D6',
+                                        borderRadius: 4,
+                                        height: '100%',
+                                        //m: 2,
+                                        boxShadow: '2px 2px 2px 1px #D6D6D6',
+                                        p: 3
+                                    }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="180"
+                                            width="auto"
+                                            image={post[1]?.img}
+                                        />
+                                        <CardContent sx={{
+                                            pt: 1,
+                                            pb: 0,
                                         }}>
-                                            <CardMedia
-                                                component="img"
-                                                height="180"
-                                                width="auto"
-                                                image={post[1]?.img}
-                                            />
-                                            <CardContent sx={{
-                                                pt: 1,
-                                                pb: 0,
-                                            }}>
-                                                <ThemeProvider theme={theme}>
-                                                    <Typography gutterBottom variant="h6" component="div">
-                                                        {post[1]?.itemName}
-                                                    </Typography>
-                                                </ThemeProvider>
-                                                <ThemeProvider theme={theme}>
-                                                    <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }}>
-                                                        <LocationOnIcon sx={{
-                                                            mr: 1,
-                                                            mb: 1
-                                                        }} />
-                                                        {post[1].location}
-                                                    </Typography>
-                                                </ThemeProvider>
-                                            </CardContent>
-                                            <CardActions sx={{ p: 0 }}>
-                                                <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
-                                                    <Button onClick={(e) => handleShowItem(post[0])}>See More</Button>
-                                                </Box>
-                                                <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
-                                                    <Button onClick={(e) => handleShowEmailForm(post[0])}>Send Email</Button>
-                                                </Box>
+                                            <ThemeProvider theme={theme}>
+                                                <Typography gutterBottom variant="h6" component="div">
+                                                    {post[1]?.itemName}
+                                                </Typography>
+                                            </ThemeProvider>
+                                            <ThemeProvider theme={theme}>
+                                                <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }}>
+                                                    <LocationOnIcon sx={{
+                                                        mr: 1,
+                                                        mb: 1
+                                                    }} />
+                                                    {post[1].location}
+                                                </Typography>
+                                            </ThemeProvider>
+                                        </CardContent>
+                                        <CardActions sx={{ p: 0 }}>
+                                            <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
+                                                <Button onClick={(e) => handleShowItem(post[0])}>See More</Button>
+                                            </Box>
+                                            <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
+                                                <Button onClick={(e) => handleShowEmailForm(post[0])}>Send Email</Button>
+                                            </Box>
 
-                                            </CardActions>
-                                        </Card>
-                                    </ThemeProvider>
+                                        </CardActions>
+                                    </Card>
+                                </ThemeProvider>
 
 
 
-                                </Grid>
-                            )
-                        })
-                    }
-                </Grid>
-            </div>
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
+        </div>
         </div>
     )
 };

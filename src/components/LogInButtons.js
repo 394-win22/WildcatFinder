@@ -20,7 +20,7 @@ const buttonStyle = {
 
 export const SignInOut = () => {
     const [user] = useUserState();
-    // console.log(user)
+    console.log(user)
     const SignInButton = () => (
         <Button sx={buttonStyle} onClick={() => signInWithGoogle()}> Sign In </Button>
     );
