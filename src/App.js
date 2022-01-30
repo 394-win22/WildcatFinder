@@ -12,7 +12,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 const Title = {
   title: "WildcatFinder",
   subtitle: "Lost & Found",
-  descriptionLine: "Reporting lost items today!"
+  descriptionLine: "Found or lost something? WildcatFinder is here to help! Reporting items today!"
 }
 
 const buttonStyle = {
@@ -46,20 +46,21 @@ function App() {
   return (
     <div className="App">
       <Banner title={Title.title}
-        subtitle={Title.subtitle}
-        descriptionLine={Title.descriptionLine}
-      />
-      <SignInOut />
+              subtitle={Title.subtitle}
+              descriptionLine={Title.descriptionLine}/>
+      <div className="NavigationBar">
+        {/*<SearchBar />*/}
+        <SignInOut />
+      </div>
 
       <div className="FoundPosts">
         <FoundPosts posts={data} itemsType={itemsType} />
       </div>
+
       <div className="bottom-banner">
-        <Button sx={buttonStyle}
-          onClick={() => setItemsType("Lost")}> Lost </Button>
+        <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
         <FontAwesomeIcon className="plus-icon" icon={faPlusSquare} color="white" size="3x" onClick={() => handleMakePost()} />
-        <Button sx={buttonStyle}
-          onClick={() => setItemsType("Found")}> Found </Button>
+        <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
         <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
       </div>
 

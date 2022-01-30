@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
+import './FoundPosts.css';
 
 const cardStyle = styled('div')({
     color: '#f50505',
@@ -43,6 +44,18 @@ const theme = createTheme({
         },
     },
 });
+
+const FoundNotes = () => {
+    return (
+        <div className="Notes">Don't see what you lost? Add it!</div>
+    )
+}
+
+const LostNotes = () => {
+    return (
+        <div className="Notes">Not reported lost? Add it!</div>
+    )
+}
 
 
 const FoundPosts = ({ posts, itemsType }) => {
@@ -120,14 +133,13 @@ const FoundPosts = ({ posts, itemsType }) => {
                                         </CardActions>
                                     </Card>
                                 </ThemeProvider>
-
-
-
                             </Grid>
                         )
                     })
                 }
             </Grid>
+
+            { itemsType == 'Lost' ? <LostNotes /> : <FoundNotes />}
         </div>
     )
 };
