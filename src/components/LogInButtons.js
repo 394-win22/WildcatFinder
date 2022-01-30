@@ -10,9 +10,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const buttonStyle = {
     mx: 2,
-    width: 1 / 14,
+    width: 1,
     margin: '1%',
-    bgcolor: "rgba(28,133,255,0.95)",
+    bgcolor: "inherit",
     borderRadius: 2,
     color: "rgb(255, 255, 255)",
     '&:hover': {

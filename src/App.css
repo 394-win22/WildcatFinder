@@ -5,18 +5,6 @@
   margin:0;
 }
 
-.bottom-banner{
-  grid-template-columns:1fr 1fr 1fr;
-  overflow: hidden;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  width: 100%;
-  background-color: rgba(28,133,255,0.95);
-  position: fixed;
-  bottom: 0;
-}
-
 .plus-icon{
   padding: 10px;
 }
