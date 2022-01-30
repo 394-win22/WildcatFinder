@@ -80,7 +80,7 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                     </Typography>
                     <Stack spacing={spacing}>
                         <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" required helperText='Must be valid email' error={!validFromEmail} />
-                        <TextField id='message' label="Message" name='msg' variant="outlined" multiline rows={4} placeholder="Provide the description of item" sequired helperText="Cannot be blank" error={!validMessage} />
+                        <TextField id='message' label="Message" name='msg' variant="outlined" multiline rows={4} placeholder="Provide the description of item" required helperText="Cannot be blank" error={!validMessage} />
                         
                     </Stack>
                     <Box textAlign="right">
