@@ -4,7 +4,7 @@ import FoundPosts from './components/FoundPosts'
 import Button from "@mui/material/Button";
 import MakePost from './components/MakePost'
 import React, { useEffect, useState } from 'react';
-import {useData, useUserState} from './utilities/firebase';
+import {useData, useUserState,signInWithGoogle} from './utilities/firebase';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -103,7 +103,7 @@ function App() {
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
               <Toolbar>
                 <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
-                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => handleMakePost()}>
+                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? signInWithGoogle() : handleMakePost()}>
                   <AddIcon />
                 </StyledFab>
                 <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
