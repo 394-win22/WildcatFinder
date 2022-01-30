@@ -11,7 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import {SignInOut} from "./LogInButtons";
 import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -55,11 +55,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+
 export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+        
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
         <Grow in={true} {...({ timeout: 2000 })}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="relative" enableColorOnDark={true}>
+                <AppBar className = "appbar" position={(scrollPosition > 250 ) ? "fixed" : "relative"} enableColorOnDark={true}>
                     <Toolbar>
                         <IconButton
                             size="large"
