@@ -5,60 +5,14 @@ import Button from "@mui/material/Button";
 import MakePost from './components/MakePost'
 import React, { useEffect, useState } from 'react';
 import {useData, useUserState} from './utilities/firebase';
-import { SignInOut } from './components/LogInButtons';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 2,
-  float: 'right',
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 1),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '40ch',
-      '&:focus': {
-        width: '55ch',
-      },
-    },
-  },
-}));
+import Grow from '@mui/material/Grow';
+import {NavigationBar} from "./components/NavigationBar";
 
 const Title = {
   title: "WildcatFinder",
@@ -105,6 +59,22 @@ function App() {
   const [data, loadingData, errorData] = useData("/");
   const [user] = useUserState();
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [profile, setProfile] = useState(false);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+  })
 
   useEffect(() => {
     if (data === undefined) return;
@@ -120,59 +90,28 @@ function App() {
               descriptionLine={Title.descriptionLine}/>
 
       <div className="NavigationBar">
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="relative" enableColorOnDark={true}>
-            <Toolbar>
-              <IconButton
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="open drawer"
-                  sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <SignInOut />
-              <Typography
-                  variant="body1"
-                  noWrap
-                  component="div"
-                  sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-              >
-                { user ? <span> Welcome! {user.email} </span>: <span>Please log in to check your posts</span>}
-              </Typography>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={(event) => {setSearchTerm(event.target.value)} }
-                />
-              </Search>
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <NavigationBar user={user} setSearchTerm={setSearchTerm} setProfile={setProfile}/>
       </div>
 
       <div className="FoundPosts">
-        <FoundPosts posts={data} itemsType={itemsType} searchTerm={searchTerm} />
+        <FoundPosts posts={data} itemsType={itemsType} searchTerm={searchTerm} profile={profile} user={user}/>
       </div>
 
       <div className="BottomBanner">
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
-            <Toolbar>
-              <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
-              <StyledFab color="secondary" aria-label="add" onClick={() => handleMakePost()}>
-                <AddIcon />
-              </StyledFab>
-              <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
-              <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} />
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <Grow in={true} {...({ timeout: 2000 })}>
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
+              <Toolbar>
+                <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
+                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => handleMakePost()}>
+                  <AddIcon />
+                </StyledFab>
+                <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
+                <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} isMobile={isMobile} user={user}/>
+              </Toolbar>
+            </AppBar>
+          </Box>
+        </Grow>
       </div>
     </div>
   );

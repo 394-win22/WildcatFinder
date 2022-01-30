@@ -20,7 +20,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
 
 //import TextField from '@mui/material/TextField';
-function MakePost({ show, handleClose, posts }) {
+function MakePost({ show, handleClose, posts, isMobile, user }) {
     const spacing = 2;
     const [dateTime, setValueDT] = useState(new Date());
     const [lf, setLF] = React.useState('Found');
@@ -34,6 +34,7 @@ function MakePost({ show, handleClose, posts }) {
     const handleLF = (event) => {
         setLF(event.target.value);
     };
+
     const handleChangeDT = (newValue) => {
         setValueDT(newValue);
     };
@@ -53,7 +54,7 @@ function MakePost({ show, handleClose, posts }) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '1/3fr',
+        width: isMobile ? '1' : '0.3',
         height: '1fr',
         maxHeight: '95%', 
         overflow: 'auto',
@@ -114,6 +115,7 @@ function MakePost({ show, handleClose, posts }) {
             setData("/" + id + "/datetime", dtStr);
             setData("/" + id + "/contact_info", contactInfo);
             setData("/" + id + "/type", lf);
+            setData("/" + id + "/user_id", user.email);
             if (image !== null) {
                 handleUpload();
             } else {

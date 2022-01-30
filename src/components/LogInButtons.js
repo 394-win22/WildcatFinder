@@ -23,7 +23,11 @@ const buttonStyle = {
     },
   }
 
-export const SignInOut = () => {
+export const SignInOut = ({setProfile}) => {
+    const [user] = useUserState();
+    const [open, setOpen] = useState(false);
+    const [status, setStatus] = useState();
+
     const handleClose = () => {
         setOpen(false);
     }
@@ -37,6 +41,7 @@ export const SignInOut = () => {
     const SignOut = () => {
         setOpen(true);
         setStatus(false);
+        setProfile(false);
         signOut();
     }
 
@@ -65,10 +70,6 @@ export const SignInOut = () => {
             </Snackbar>
         )
     }
-
-    const [user] = useUserState();
-    const [open, setOpen] = useState(false);
-    const [status, setStatus] = useState();
 
     const SignInButton = () => (
         <Button sx={buttonStyle} onClick={() => SignIn()}> Sign In </Button>
