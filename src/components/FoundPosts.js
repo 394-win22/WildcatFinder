@@ -57,11 +57,11 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     const [showEmailForm, setShowEmailForm] = useState(false);
     const [getIndex, setIndex] = useState();
 
-    const deleteItems = (index) => {
-        let subsCopy = posts;
-        subsCopy.splice(index,1); // buggy
-        console.log(subsCopy);
-        setData("/", subsCopy);
+    const deleteItems =  (idx) => {
+        // let subsCopy = posts;
+        // delete subsCopy[idx]
+        // setData("/", subsCopy);
+        setData("/" + idx, null)
     }
 
     const handleShowEmailForm = (idx) => {
@@ -133,7 +133,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                         <Button onClick={() => handleShowEmailForm(post[0])}>Send Email</Button>
                                                     </Box>
                                                     { user && post[1].user_id === user.email ? <DeleteForeverIcon fontSize={"small"}
-                                                                                                                  onClick={() => deleteItems(index)}/> : null}
+                                                                                                                  onClick={() => deleteItems(post[0])}/> : null}
                                                 </CardActions>
                                             </Card>
                                         </Grow>
