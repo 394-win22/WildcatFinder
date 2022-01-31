@@ -62,7 +62,7 @@ const LostNotes = () => {
 const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     const [showItem, setShowItem] = useState(false);
     const [showEmailForm, setShowEmailForm] = useState(false);
-    const [getIndex, setIndex] = useState(null);
+    const [getIndex, setIndex] = useState();
     const handleShowEmailForm = (idx) => {
         setIndex(idx);
         setShowEmailForm(true);
@@ -75,13 +75,12 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     };
 
     const handlesShowItemClose = () => setShowItem(false);
-    //const allEmails = Object.entries(posts).map(post => post[1].contact_info)
+    const allEmails = Object.entries(posts).map(post => post[1].contact_info)
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            <ShowEmailForm toEmail={posts[getIndex].contact_info} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+            <ShowEmailForm toEmail={getIndex ? posts[getIndex].contact_info : null} show={showEmailForm} handleClose={handleShowEmailFormClose} />
             <Grid container spacing={2}>
-                
                 {Object.entries(posts).reverse()
                     .filter(post => profile ? post[1].user_id === user.email : true)
                     .filter(post => post[1].type === itemsType)
