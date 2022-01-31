@@ -79,7 +79,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            <ShowEmailForm toEmail={getIndex ? posts[getIndex].contact_info : null} show={showEmailForm} handleClose={handleShowEmailFormClose} />
+            <ShowEmailForm toEmail={getIndex ? posts[getIndex].contact_info : null} show={showEmailForm} handleClose={handleShowEmailFormClose} user ={user}/>
             <Grid container spacing={2}>
                 {Object.entries(posts).reverse()
                     .filter(post => profile ? post[1].user_id === user.email : true)

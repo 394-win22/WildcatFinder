@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 
 
 //Name, description, photo, location, contact
-export default function ShowEmailForm({ toEmail, show, handleClose }) {
+export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
     const [validFromEmail, setValidFromEmail] = useState(true);
     const [validMessage, setValidMessage] = useState(true);
     const spacing = 2;
@@ -78,7 +78,7 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
                         Email Now
                     </Typography>
                     <Stack spacing={spacing}>
-                        <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" required helperText='Must be valid email' error={!validFromEmail} />
+                        <TextField id='fromEmail' label="From Email" name='from_email' variant="outlined" defaultValue = {user?user['email']:""} required helperText='Must be valid email' error={!validFromEmail} />
                         <TextField id='message' label="Message" name='msg' variant="outlined" multiline rows={4} placeholder="Provide the description of item" sequired helperText="Cannot be blank" error={!validMessage} />
                         
                     </Stack>
