@@ -75,7 +75,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     };
 
     const handlesShowItemClose = () => setShowItem(false);
-    const allEmails = Object.entries(posts).map(post => post[1].contact_info)
+    //const allEmails = Object.entries(posts).map(post => post[1].contact_info)
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
