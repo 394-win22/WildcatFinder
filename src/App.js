@@ -13,6 +13,12 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import Grow from '@mui/material/Grow';
 import {NavigationBar} from "./components/NavigationBar";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Title = {
   title: "WildcatFinder",
@@ -61,6 +67,9 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [profile, setProfile] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleSnackBarClose = () => setOpen(false);
 
   //choose the screen size
   const handleResize = () => {
@@ -69,6 +78,11 @@ function App() {
     } else {
       setIsMobile(false)
     }
+  }
+
+  const PostWithoutSignIn = () => {
+    setOpen(true);
+    signInWithGoogle();
   }
 
   // create an event listener
@@ -103,9 +117,17 @@ function App() {
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
               <Toolbar>
                 <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
-                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? signInWithGoogle() : handleMakePost()}>
+                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? PostWithoutSignIn() : handleMakePost()}>
                   <AddIcon />
                 </StyledFab>
+                <Snackbar open={open}
+                          autoHideDuration={3000}
+                          onClose={handleSnackBarClose}
+                          anchorOrigin={{horizontal: "center", vertical:"top"}}>
+                  <Alert onClose={handleSnackBarClose} severity="info" sx={{ width: '100%' }}>
+                    Please Log in to post.
+                  </Alert>
+                </Snackbar>
                 <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
                 <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} isMobile={isMobile} user={user}/>
               </Toolbar>

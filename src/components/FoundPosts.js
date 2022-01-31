@@ -1,5 +1,6 @@
 // collection of posts
 import React, { useState } from 'react';
+import {setData} from "../utilities/firebase";
 import ShowItem from './Item';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,7 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { styled, shadows } from '@mui/system';
 import Box from '@mui/material/Box'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -15,14 +15,7 @@ import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
 import Grow from '@mui/material/Grow';
 import './FoundPosts.css';
-
-const cardStyle = styled('div')({
-    color: '#f50505',
-    backgroundColor: {
-        xs: "secondary.light", sm: "#0000ff"
-    },
-    boxShadow: 6,
-});
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const theme = createTheme({
     typography: {
@@ -63,6 +56,14 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     const [showItem, setShowItem] = useState(false);
     const [showEmailForm, setShowEmailForm] = useState(false);
     const [getIndex, setIndex] = useState();
+
+    const deleteItems = (index) => {
+        let subsCopy = posts;
+        subsCopy.splice(index,1); // buggy
+        console.log(subsCopy);
+        setData("/", subsCopy);
+    }
+
     const handleShowEmailForm = (idx) => {
         setIndex(idx);
         setShowEmailForm(true);
@@ -75,7 +76,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     };
 
     const handlesShowItemClose = () => setShowItem(false);
-    const allEmails = Object.entries(posts).map(post => post[1].contact_info)
+
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
@@ -85,7 +86,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                     .filter(post => profile ? post[1].user_id === user.email : true)
                     .filter(post => post[1].type === itemsType)
                     .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()))
-                    .map(post => {
+                    .map((post, index) => {
                             return (
                                 <Grid item xs={12} sm={6} md={3} key={post[0]}>
                                     <ThemeProvider theme={theme}>
@@ -126,11 +127,13 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                 </CardContent>
                                                 <CardActions sx={{ p: 0 }}>
                                                     <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
-                                                        <Button onClick={(e) => handleShowItem(post[0])}>See More</Button>
+                                                        <Button onClick={() => handleShowItem(post[0])}>See More</Button>
                                                     </Box>
                                                     <Box sx={{ marginLeft: "auto", marginRight: "auto" }}>
-                                                        <Button onClick={(e) => handleShowEmailForm(post[0])}>Send Email</Button>
+                                                        <Button onClick={() => handleShowEmailForm(post[0])}>Send Email</Button>
                                                     </Box>
+                                                    { user && post[1].user_id === user.email ? <DeleteForeverIcon fontSize={"small"}
+                                                                                                                  onClick={() => deleteItems(index)}/> : null}
                                                 </CardActions>
                                             </Card>
                                         </Grow>
@@ -141,7 +144,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                 }
             </Grid>
 
-            { itemsType == 'Lost' ? <LostNotes /> : <FoundNotes />}
+            { itemsType === 'Lost' ? <LostNotes /> : <FoundNotes />}
         </div>
     )
 };
