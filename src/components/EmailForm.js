@@ -26,7 +26,6 @@ export default function ShowEmailForm({ toEmail, show, handleClose }) {
         boxShadow: 24,
         p: 4,
     };
-
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
