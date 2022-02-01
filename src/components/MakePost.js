@@ -11,13 +11,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Stack,LinearProgress } from '@mui/material';
+import { Stack, LinearProgress } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { ref as sRef, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { storage } from '../utilities/firebase'
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 //import TextField from '@mui/material/TextField';
 function MakePost({ show, handleClose, posts, isMobile, user }) {
@@ -30,6 +32,11 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
     const [validLoc, setValidLoc] = useState(true);
     const [validContact, setValidContact] = useState(true);
     const id = getRefByPush('/');
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+      setOpen(true);
+    };
 
     const handleLF = (event) => {
         setLF(event.target.value);
@@ -119,6 +126,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                 setData("/" + id + "/img", "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png");
             }
             handleClose();
+            setOpen(true);
         }
 
         setValidContact(contactInfo?.length > 0 && validateEmail(contactInfo));
@@ -126,6 +134,10 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
         setValidName(location?.length > 0);
 
     }
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
     return (
         <div>
             <Modal
@@ -209,6 +221,11 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                         <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
                             Submit
                         </Button>
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            This is a success message!
+                            </Alert>
+                        </Snackbar>
                         <Button sx={{ mt: spacing, marginLeft: "5%"}} size="small" variant="outlined" onClick={() => handleClose()}>
                             Close
                         </Button>
