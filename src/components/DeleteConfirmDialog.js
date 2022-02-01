@@ -5,14 +5,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {setData} from "../utilities/firebase";
+import {setData,storage} from "../utilities/firebase";
+import { ref as sref,deleteObject } from 'firebase/storage';
 
-export default function DeleteConfirmDialog({idx, open, setOpen, deleteItemName}) {
+export default function DeleteConfirmDialog({idx, open, setOpen, deleteItemName, post}) {
     const handleClose = () => {
         setOpen(false);
     };
 
     const handleConfirmClose = () => {
+        var fileUrl = post[idx].img;
+        const desertRef = sref(storage,fileUrl);
+
+        deleteObject(desertRef).then(() => {
+            //console.log("File deleted successfully");
+        }).catch((error) => {
+            alert("Uh-oh, an error occurred!");
+        });
         setData("/" + idx, null);
         setOpen(false);
     };
