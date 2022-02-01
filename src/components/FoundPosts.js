@@ -108,7 +108,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                 {Object.entries(posts).reverse()
                     .filter(post => profile ? post[1].user_id === user.email : true)
                     .filter(post => post[1].type === itemsType)
-                    .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .filter(post => post[1].itemName.toLowerCase().includes(searchTerm.toLowerCase()) || post[1].location.toLowerCase().includes(searchTerm.toLowerCase()))
                     .map((post) => {
                             return (
                                 <Grid item xs={12} sm={6} md={3} key={post[0]}>
