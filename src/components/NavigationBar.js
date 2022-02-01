@@ -95,7 +95,6 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
                         >
                             <AccountCircle onClick={() => user ? setProfile(true) : {}}/>
                         </IconButton>
-                        <SignInOut setProfile={setProfile}/>
                         <Typography
                             variant="body1"
                             noWrap
@@ -115,6 +114,7 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
                             />
                         </Search>
                         <Button sx={{color:"inherit"}} onClick={() => setSearchTerm("")}> clear </Button>
+                        <SignInOut setProfile={setProfile}/>
                     </Toolbar>
                 </AppBar>
             </Box>

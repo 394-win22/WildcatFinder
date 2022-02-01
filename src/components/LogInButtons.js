@@ -72,11 +72,11 @@ export const SignInOut = ({setProfile}) => {
     }
 
     const SignInButton = () => (
-        <Button sx={buttonStyle} onClick={() => SignIn()}> Sign In </Button>
+        <Button sx={buttonStyle} onClick={() => SignIn()}> Login </Button>
     );
     
     const SignOutButton = () => (
-        <Button sx={buttonStyle} onClick={() => SignOut()}> Sign Out </Button>
+        <Button sx={buttonStyle} onClick={() => SignOut()}> Logout </Button>
     );
 
     return ( 
