@@ -11,7 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Stack } from '@mui/material';
+import { Stack,LinearProgress } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { ref as sRef, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { storage } from '../utilities/firebase'
@@ -105,9 +105,6 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
         // validate
 
         if (itemName?.length > 0 && location?.length > 0 && contactInfo?.length > 0 && validateEmail(contactInfo)) {
-            console.log('we here')
-            
-            
             setData("/" + id + "/itemName", itemName);
             setData("/" + id + "/location", location);
             setData("/" + id + "/description", description);
@@ -188,6 +185,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                     <PhotoCamera />
                                 </IconButton>
                             </label>
+                            <label>{image ? image.name : "Haven't uploaded yet"}</label>
                         </Box>
                     </Stack>
                     <Box textAlign="right" marginTop={2}>
