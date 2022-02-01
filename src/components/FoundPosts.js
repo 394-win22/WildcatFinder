@@ -13,7 +13,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import ShowEmailForm from './EmailForm';
 import Grow from '@mui/material/Grow';
-import './FoundPosts.css';
+import './css/FoundPosts.css';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeleteConfirmDialog from "./DeleteConfirmDialog";
 

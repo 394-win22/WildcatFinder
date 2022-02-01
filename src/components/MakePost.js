@@ -169,9 +169,26 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                        <TextField id="itemLocation" label="Item Location" variant="outlined" required helperText="Cannot be blank" error={!validLoc} />
-                        <TextField id='itemDescription' label="Item Description" name='item_description' variant="outlined" />
-                        <TextField id='contactInfo' label="Contact Information" name='contact_info' defaultValue = {user?user['email']:""} variant="outlined" required helperText="Must be valid email" error={!validContact} />
+                        <TextField id="itemLocation"
+                                   label="Item Location"
+                                   variant="outlined"
+                                   required
+                                   helperText="Cannot be blank"
+                                   placeholder="Item Location"
+                                   error={!validLoc} />
+                        <TextField id='itemDescription'
+                                   label="Item Description"
+                                   name='item_description'
+                                   placeholder="Descriptions"
+                                   variant="outlined" />
+                        <TextField id='contactInfo'
+                                   label="Contact Information"
+                                   name='contact_info'
+                                   defaultValue = { user ? user.email : "" }
+                                   placeholder= { user ? user.email :"" }
+                                   variant="outlined"
+                                   required helperText="Must be valid email"
+                                   error={!validContact} />
                         <Box textAlign="center">
                             <label htmlFor="contained-button-file">
                                 <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleFileChange}/>

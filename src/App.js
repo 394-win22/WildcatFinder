@@ -1,10 +1,12 @@
 import './App.css'
-import Banner from './components/Banner'
-import FoundPosts from './components/FoundPosts'
-import Button from "@mui/material/Button";
-import MakePost from './components/MakePost'
 import React, { useEffect, useState } from 'react';
 import {useData, useUserState,signInWithGoogle} from './utilities/firebase';
+import Banner from './components/Banner'
+import FoundPosts from './components/FoundPosts'
+import MakePost from './components/MakePost'
+import {Loading} from "./components/Loading";
+import {Error404} from "./components/404";
+import {NavigationBar} from "./components/NavigationBar";
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,9 +14,9 @@ import Toolbar from '@mui/material/Toolbar';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import Grow from '@mui/material/Grow';
-import {NavigationBar} from "./components/NavigationBar";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
+import Button from "@mui/material/Button";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -26,20 +28,22 @@ const Title = {
   descriptionLine: "Found or lost something? WildcatFinder is here to help! Reporting items today!"
 }
 
-const buttonStyle = {
-  width: 1,
-  height: 1,
-  marginLeft: "10%",
-  marginRight: "10%",
-  bgcolor: "inherit",
-  borderRadius: 2,
-  color: "rgb(255, 255, 255)",
-  '&:hover': {
-    bgcolor: "rgba(129,182,239,0.95)"
-  },
-  '&:focus': {
-    bgcolor: "rgba(129,182,239,0.95)"
-  },
+const buttonStyle = (selected) => {
+  return {
+    width: 1,
+    height: 1,
+    marginLeft: "10%",
+    marginRight: "10%",
+    bgcolor: selected ? "rgba(14,86,171,0.95)" : "inherit",
+    borderRadius: 2,
+    color: "rgb(255, 255, 255)",
+    '&:hover': {
+      bgcolor: selected ? "rgba(109,153,200,0.95)" : "rgba(129,182,239,0.95)"
+    },
+    '&:focus': {
+      bgcolor: "rgba(129,182,239,0.95)"
+    },
+  }
 }
 
 const StyledFab = styled(Fab)({
@@ -93,9 +97,8 @@ function App() {
   useEffect(() => {
     if (data === undefined) return;
   }, [data])
-
-  if (errorData) return <h1>{errorData}</h1>;
-  if (loadingData) return <h1>Loading the data...</h1>;
+  if (errorData) return <Error404 />;
+  if (loadingData) return <Loading isMobile={isMobile}/>;
 
   return (
     <div className="App">
@@ -116,7 +119,7 @@ function App() {
           <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
               <Toolbar>
-                <Button sx={buttonStyle} onClick={() => setItemsType("Lost")}> Lost </Button>
+                <Button sx={buttonStyle(itemsType === "Lost")} onClick={() => setItemsType("Lost")}> Lost </Button>
                 <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? PostWithoutSignIn() : handleMakePost()}>
                   <AddIcon />
                 </StyledFab>
@@ -128,7 +131,7 @@ function App() {
                     Please Log in to post.
                   </Alert>
                 </Snackbar>
-                <Button sx={buttonStyle} onClick={() => setItemsType("Found")}> Found </Button>
+                <Button sx={buttonStyle(itemsType === "Found")} onClick={() => setItemsType("Found")}> Found </Button>
                 <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} isMobile={isMobile} user={user}/>
               </Toolbar>
             </AppBar>

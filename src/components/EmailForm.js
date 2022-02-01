@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
+import {Box} from '@mui/material';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import emailjs from '@emailjs/browser';
 import swal from 'sweetalert';
-
-
 
 //Name, description, photo, location, contact
 export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
@@ -22,6 +20,10 @@ export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
         transform: 'translate(-50%, -50%)',
         width: 400,
         bgcolor: 'background.paper',
+        backgroundImage: 'url("https://s2.loli.net/2022/02/02/jqObZC6kz7flaGQ.png")',
+        backgroundSize: "50% 50%",
+        backgroundPosition: 'center', /* Center the image */
+        backgroundRepeat: 'no-repeat', /* Do not repeat the image */
         border: '0px solid #000',
         boxShadow: 24,
         p: 4,
@@ -61,7 +63,7 @@ export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
 
 
     return (
-        <div>
+        <div className="emailform">
             <Modal
                 open={show}
                 onClose={() => {
@@ -71,7 +73,7 @@ export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-                style={{ overflow: 'scroll' }}
+                style={{ overflow: 'scroll'}}
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: "center", marginBottom: 10}}>

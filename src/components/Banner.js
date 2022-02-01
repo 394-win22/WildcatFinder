@@ -1,4 +1,4 @@
-import './Banner.css'
+import './css/Banner.css'
 import Grow from '@mui/material/Grow';
 
 const Banner = ({title, subtitle, descriptionLine}) => {
