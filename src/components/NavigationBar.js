@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
+export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const handleScroll = () => {
         const position = window.pageYOffset;
@@ -113,6 +113,7 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
                                 <SearchIcon />
                             </SearchIconWrapper>
                             <StyledInputBase
+                                value={searchTerm}
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
                                 onChange={(event) => {setSearchTerm(event.target.value)} }
