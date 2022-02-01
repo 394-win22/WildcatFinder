@@ -77,24 +77,28 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar className = "appbar" position={(scrollPosition > 250 ) ? "fixed" : "relative"} enableColorOnDark={true}>
                     <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ mr: 2 }}
-                        >
-                            <HomeIcon onClick={() => setProfile(false)}/>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ mr: 2 }}
-                        >
-                            <AccountCircle onClick={() => user ? setProfile(true) : {}}/>
-                        </IconButton>
+                        {user &&
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    sx={{ mr: 2 }}
+                                >
+                                    <HomeIcon onClick={() => setProfile(false)}/>
+                                </IconButton>
+                        }
+                        {user &&
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    sx={{mr: 2}}
+                                >
+                                    <AccountCircle onClick={() => setProfile(true)}/>
+                                </IconButton>
+                        }
                         <Typography
                             variant="body1"
                             noWrap
