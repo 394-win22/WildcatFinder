@@ -106,7 +106,7 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                         >
-                            { user ? <span> Welcome! {user.email} </span>: <span>Please <a style = {{cursor: 'pointer'}} onClick={signInWithGoogle}>log in</a> to check your posts</span>}
+                            { user ? <span> Welcome! {user.email} </span>: <span>Please <a style = {{cursor: 'pointer',textDecorationLine: 'underline'}} onClick={signInWithGoogle}>log in</a> to check your posts</span>}
                         </Typography>
                         <Search>
                             <SearchIconWrapper>
