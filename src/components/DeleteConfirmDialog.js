@@ -15,8 +15,9 @@ export default function DeleteConfirmDialog({idx, open, setOpen, deleteItemName,
 
     const handleConfirmClose = () => {
         var fileUrl = post[idx].img;
-        const desertRef = sref(storage, fileUrl);
+        
         if(fileUrl !== "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png"){
+            const desertRef = sref(storage, fileUrl);
                 deleteObject(desertRef).then(() => {
                 //console.log("File deleted successfully");
             }).catch((error) => {
