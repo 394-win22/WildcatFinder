@@ -26,7 +26,8 @@ const buttonStyle = {
 export const SignInOut = ({setProfile}) => {
     const [user] = useUserState();
     const [open, setOpen] = useState(false);
-    const [status, setStatus] = useState();
+    const [signInPressed, setSignInPressed] = useState();
+    const [signOutPressed, setSignOutPressed] = useState();
 
     const handleClose = () => {
         setOpen(false);
@@ -34,15 +35,15 @@ export const SignInOut = ({setProfile}) => {
 
     const SignIn = () => {
         setOpen(true);
-        setStatus(true);
         signInWithGoogle();
+        setSignInPressed(true);
     }
 
     const SignOut = () => {
         setOpen(true);
-        setStatus(false);
         setProfile(false);
         signOut();
+        setSignOutPressed(true);
     }
 
     const Welcome = () => {
@@ -73,16 +74,19 @@ export const SignInOut = ({setProfile}) => {
 
     const SignInButton = () => (
         <Button sx={buttonStyle} onClick={() => SignIn()}> Login </Button>
+        
     );
     
     const SignOutButton = () => (
         <Button sx={buttonStyle} onClick={() => SignOut()}> Logout </Button>
+       
     );
 
     return ( 
         <div className ="signInAndOut">
             { user ? <SignOutButton /> : <SignInButton /> }
-            { status ? <Welcome /> : <Bye />}
+            { signInPressed && user ? <Welcome/> : <div />}
+            { signOutPressed ? <Bye/> : <div />}
         </div>);
 };
 
