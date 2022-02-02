@@ -96,6 +96,10 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
         );
     }
 
+    const handleCloseMessage = () => {
+        setOpen(false);
+    };
+
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
@@ -126,7 +130,6 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                 setData("/" + id + "/img", "https://s2.loli.net/2022/01/12/uc38gRPtJ6QahDI.png");
             }
             handleClose();
-            setOpen(true);
         }
 
         setValidContact(contactInfo?.length > 0 && validateEmail(contactInfo));
@@ -218,11 +221,16 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                         </Box>
                     </Stack>
                     <Box textAlign="right" marginTop={2}>
-                        <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => addNewPost(handleClose)}>
+                        <Button sx={{ mt: spacing }} size="small" variant="outlined" onClick={() => {
+                            handleClick();
+                            addNewPost(handleClose);
+                            
+                            
+                        }}>
                             Submit
                         </Button>
-                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseMessage}>
+                            <Alert onClose={handleCloseMessage} severity="success" sx={{ width: '100%' }}>
                             This is a success message!
                             </Alert>
                         </Snackbar>
