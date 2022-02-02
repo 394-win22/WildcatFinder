@@ -38,7 +38,6 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
     const [mapOpen, setMapOpen] = useState(false);
     const [mapLocation, setMapLocation] = useState("");
 
-    console.log(mapLocation);
     const handleClick = () => {
       setOpen(true);
     };
@@ -141,6 +140,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
         setValidContact(contactInfo?.length > 0 && validateEmail(contactInfo));
         setValidLoc(location?.length > 0);
         setValidName(location?.length > 0);
+        setMapLocation("");
 
     }
     const Alert = React.forwardRef(function Alert(props, ref) {
