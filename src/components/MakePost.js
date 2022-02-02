@@ -113,8 +113,10 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
     }
 
     const addNewPost = (handleClose) => {
+        
         const itemName = document.querySelector('#itemName').value;
         const location =  document.querySelector('#itemLocation').value;
+
         const description = document.querySelector('#itemDescription').value;
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
@@ -197,11 +199,15 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                        variant="outlined"
                                        required
                                        helperText="Cannot be blank"
-                                       placeholder= { mapLocation ? mapLocation : "Item Location"}
+
+                                       defaultValue={ mapLocation ? mapLocation : ""}
+                                       onChange={e=>{
+                                           setMapLocation(e.target.value)
+                                       }}
+                                       value ={mapLocation}
+                                       placeholder= {"Item Location"}
                                        error={!validLoc}
-                                       sx={{width: isMobile ? "84%" : "86%"}}
-                                       value={mapLocation}
-                                       onChange={(e) => setMapLocation(e.target.value)}/>
+                                       sx={{width: isMobile ? "84%" : "86%"}}/>
                             <IconButton color="primary" aria-label="upload picture" component="span">
                                 <LocationOnIcon fontSize="large" onClick={() => setMapOpen(true)}/>
                             </IconButton>
