@@ -114,7 +114,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
 
     const addNewPost = (handleClose) => {
         const itemName = document.querySelector('#itemName').value;
-        const location = mapLocation ? mapLocation : document.querySelector('#itemLocation').value;
+        const location =  document.querySelector('#itemLocation').value ? document.querySelector('#itemLocation').value : mapLocation;
         const description = document.querySelector('#itemDescription').value;
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
@@ -197,7 +197,6 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                        variant="outlined"
                                        required
                                        helperText="Cannot be blank"
-                                       defaultValue={ mapLocation ? mapLocation : ""}
                                        placeholder= { mapLocation ? mapLocation : "Item Location"}
                                        error={!validLoc}
                                        sx={{width: isMobile ? "84%" : "86%"}}/>

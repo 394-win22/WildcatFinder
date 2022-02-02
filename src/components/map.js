@@ -17,7 +17,7 @@ const MapContainer = ({mapOpen, setMapOpen, location, setLocation, isMobile}) =>
         top: "0",
         bottom: "0",
         height: isMobile ? "60vh" : "88vh",
-        width: "80%"
+        width: isMobile ? "100%" : "80%"
     };
 
     const defaultCenter = {
@@ -33,7 +33,7 @@ const MapContainer = ({mapOpen, setMapOpen, location, setLocation, isMobile}) =>
                     onClose={() => {
                         setMapOpen(false);
                     }}
-                    style={{ overflow: 'scroll' }}
+                    style={{ overflow: 'scroll'}}
                 >
                     <Box>
                         <GoogleMap

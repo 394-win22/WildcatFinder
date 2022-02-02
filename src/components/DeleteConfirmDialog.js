@@ -47,7 +47,7 @@ export default function DeleteConfirmDialog({idx, open, setOpen, deleteItemName,
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleConfirmClose} autoFocus>
-                        Yes
+                        Confirm
                     </Button>
                 </DialogActions>
             </Dialog>
