@@ -12,6 +12,7 @@ import {SignInOut} from "./LogInButtons";
 import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useState,useEffect} from "react";
+import { signInWithGoogle} from '../utilities/firebase.js';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -56,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
+export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const handleScroll = () => {
         const position = window.pageYOffset;
@@ -105,13 +106,14 @@ export const NavigationBar = ({user, setSearchTerm, setProfile}) => {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                         >
-                            { user ? <span> Welcome! {user.email} </span>: <span>Please log in to check your posts</span>}
+                            { user ? <span> Welcome! {user.email} </span>: <span>Please <a style = {{cursor: 'pointer',textDecorationLine: 'underline'}} onClick={signInWithGoogle}>log in</a> to check your posts</span>}
                         </Typography>
                         <Search>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
                             <StyledInputBase
+                                value={searchTerm}
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
                                 onChange={(event) => {setSearchTerm(event.target.value)} }

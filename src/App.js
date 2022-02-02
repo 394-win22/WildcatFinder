@@ -108,7 +108,7 @@ function App() {
               isMobile={isMobile}/>
 
       <div className="NavigationBar">
-        <NavigationBar user={user} setSearchTerm={setSearchTerm} setProfile={setProfile}/>
+        <NavigationBar user={user} setSearchTerm={setSearchTerm} setProfile={setProfile} searchTerm={searchTerm}/>
       </div>
 
       <div className="FoundPosts">
