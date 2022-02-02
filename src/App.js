@@ -104,7 +104,8 @@ function App() {
     <div className="App">
       <Banner title={Title.title}
               subtitle={Title.subtitle}
-              descriptionLine={Title.descriptionLine}/>
+              descriptionLine={Title.descriptionLine}
+              isMobile={isMobile}/>
 
       <div className="NavigationBar">
         <NavigationBar user={user} setSearchTerm={setSearchTerm} setProfile={setProfile}/>
