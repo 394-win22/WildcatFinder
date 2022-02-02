@@ -16,24 +16,29 @@ import TextField from '@mui/material/TextField';
 import { ref as sRef, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { storage } from '../utilities/firebase'
 import IconButton from '@mui/material/IconButton';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import MapContainer from "./map";
 
 //import TextField from '@mui/material/TextField';
 function MakePost({ show, handleClose, posts, isMobile, user }) {
     const spacing = 2;
     const [dateTime, setValueDT] = useState(new Date());
-    const [lf, setLF] = React.useState('Found');
+    const [lf, setLF] = useState('Found');
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [validName, setValidName] = useState(true);
     const [validLoc, setValidLoc] = useState(true);
     const [validContact, setValidContact] = useState(true);
     const id = getRefByPush('/');
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [mapOpen, setMapOpen] = useState(false);
+    const [mapLocation, setMapLocation] = useState("");
 
+    console.log(mapLocation);
     const handleClick = () => {
       setOpen(true);
     };
@@ -110,7 +115,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
 
     const addNewPost = (handleClose) => {
         const itemName = document.querySelector('#itemName').value;
-        const location = document.querySelector('#itemLocation').value;
+        const location = mapLocation ? mapLocation : document.querySelector('#itemLocation').value;
         const description = document.querySelector('#itemDescription').value;
         const contactInfo = document.querySelector('#contactInfo').value;
         // validate
@@ -185,26 +190,37 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                        <TextField id="itemLocation"
-                                   label="Item Location"
-                                   variant="outlined"
-                                   required
-                                   helperText="Cannot be blank"
-                                   placeholder="Item Location"
-                                   error={!validLoc} />
+
+                        <Box>
+                            <TextField id="itemLocation"
+                                       label="Item Location"
+                                       variant="outlined"
+                                       required
+                                       helperText="Cannot be blank"
+                                       defaultValue={ mapLocation ? mapLocation : ""}
+                                       placeholder= { mapLocation ? mapLocation : "Item Location"}
+                                       error={!validLoc}
+                                       sx={{width: isMobile ? "84%" : "86%"}}/>
+                            <IconButton color="primary" aria-label="upload picture" component="span">
+                                <LocationOnIcon fontSize="large" onClick={() => setMapOpen(true)}/>
+                            </IconButton>
+                        </Box>
+
                         <TextField id='itemDescription'
                                    label="Item Description"
                                    name='item_description'
                                    placeholder="Descriptions"
                                    variant="outlined" />
+
                         <TextField id='contactInfo'
                                    label="Contact Information"
                                    name='contact_info'
                                    defaultValue = { user ? user.email : "" }
-                                   placeholder= { user ? user.email :"" }
+                                   placeholder= { user ? user.email : "" }
                                    variant="outlined"
                                    required helperText="Must be valid email"
                                    error={!validContact} />
+
                         <Box textAlign="center">
                             <label htmlFor="contained-button-file">
                                 <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleFileChange}/>
@@ -218,7 +234,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                     <PhotoCamera />
                                 </IconButton>
                             </label>
-                            <label>{image ? image.name : "Haven't uploaded yet"}</label>
+                            <label>{image ? "Successfully upload!" : "Haven't uploaded yet."}</label>
                         </Box>
                     </Stack>
                     <Box textAlign="right" marginTop={2}>
@@ -238,6 +254,11 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                     Item Posted!
                 </Alert>
             </Snackbar>
+            <MapContainer mapOpen={mapOpen}
+                          setMapOpen={setMapOpen}
+                          location={mapLocation}
+                          setLocation={setMapLocation}
+                          isMobile={isMobile}/>
         </div>
     );
 };
