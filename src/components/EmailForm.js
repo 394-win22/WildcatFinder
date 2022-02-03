@@ -38,11 +38,13 @@ export default function ShowEmailForm({ toEmail, show, handleClose, user }) {
 
     const ContactUs = (toEmail, handleClose) => {
         const fromEmail = document.querySelector('#fromEmail').value;
-        const message   = document.querySelector('#message').value;  
+        const message   = document.querySelector('#message').value;
+        const disclosure_message = "DISCLOSURE: Kindly verify the credentials of the person who is claiming the ownership of the item";
+        const final_message = message + "\n\n"+ disclosure_message
         const params = {
             "to_email": toEmail,
             "from_email": fromEmail,
-            "message_html": message,
+            "message_html": final_message,
         };
         
         if (toEmail?.length > 0 && fromEmail?.length > 0 && validateEmail(fromEmail) && message?.length > 0) {
