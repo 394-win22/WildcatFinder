@@ -78,7 +78,6 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [deleteItemIdx, setDeleteItemIdx] = useState();
     const [deleteItemName, setDeleteItemName] = useState();
-
     const deleteItems =  (idx, name) => {
         setDeleteItemName(name);
         setDeleteItemIdx(idx);
@@ -102,7 +101,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
     return (
         <div style={{ marginTop: "5rem", marginLeft: "10%", marginRight: "10%" }}>
             <ShowItem post={posts[getIndex]} show={showItem} handleClose={handlesShowItemClose} />
-            <ShowEmailForm toEmail={getIndex ? posts[getIndex].contact_info : null} show={showEmailForm} handleClose={handleShowEmailFormClose} user ={user}/>
+            <ShowEmailForm toEmail={posts[getIndex]?.contact_info} show={showEmailForm} handleClose={handleShowEmailFormClose} user ={user}/>
             <DeleteConfirmDialog idx={deleteItemIdx} open={openDialog} setOpen={setOpenDialog} deleteItemName={deleteItemName} post={posts}/>
             <Grid container spacing={2}>
                 {Object.entries(posts).reverse()
