@@ -34,14 +34,14 @@ const buttonStyle = (selected) => {
     height: 1,
     marginLeft: "10%",
     marginRight: "10%",
-    bgcolor: selected ? "rgba(14,86,171,0.95)" : "inherit",
+    bgcolor: selected ? "#674b94" : "inherit",
     borderRadius: 2,
     color: "rgb(255, 255, 255)",
     '&:hover': {
-      bgcolor: selected ? "rgba(109,153,200,0.95)" : "rgba(129,182,239,0.95)"
+      bgcolor: selected ? "#674b94" : "#674b94"
     },
     '&:focus': {
-      bgcolor: "rgba(129,182,239,0.95)"
+      bgcolor: "#674b94"
     },
   }
 }
@@ -49,15 +49,15 @@ const buttonStyle = (selected) => {
 const StyledFab = styled(Fab)({
   position: 'absolute',
   zIndex: 1,
-  backgroundColor: "#1E90FFFF",
+  backgroundColor: "#674b94" ,
   left: 0,
   right: 0,
   margin: '0 auto',
   '&:hover': {
-    backgroundColor: "rgba(129,182,239,0.95)"
+    backgroundColor: "#74589d"
   },
   '&:focus': {
-    backgroundColor: "rgba(129,182,239,0.95)"
+    backgroundColor: "#74589d"
   },
 });
 
@@ -105,7 +105,8 @@ function App() {
       <Banner title={Title.title}
               subtitle={Title.subtitle}
               descriptionLine={Title.descriptionLine}
-              isMobile={isMobile}/>
+              isMobile={isMobile}
+              />
 
       <div className="NavigationBar">
         <NavigationBar user={user} setSearchTerm={setSearchTerm} setProfile={setProfile} searchTerm={searchTerm}/>
@@ -118,7 +119,7 @@ function App() {
       <div className="BottomBanner">
         <Grow in={true} {...({ timeout: 2000 })}>
           <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} enableColorOnDark={true}>
+            <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, background: '#4c2c83'}} enableColorOnDark={true}>
               <Toolbar>
                 <Button sx={buttonStyle(itemsType === "Lost")} onClick={() => setItemsType("Lost")}> Lost </Button>
                 <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? PostWithoutSignIn() : handleMakePost()}>

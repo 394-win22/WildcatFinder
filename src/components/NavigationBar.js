@@ -30,6 +30,7 @@ const Search = styled('div')(({ theme }) => ({
     },
 }));
 
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -76,7 +77,7 @@ export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => 
     return (
         <Grow in={true} {...({ timeout: 2000 })}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar className = "appbar" position={(scrollPosition > 250 ) ? "fixed" : "relative"} enableColorOnDark={true}>
+                <AppBar className = "appbar" position={(scrollPosition > 250 ) ? "fixed" : "relative"} enableColorOnDark={true} style={{ background: '#4c2c83'}}>
                     <Toolbar>
                         {user &&
                                 <IconButton
