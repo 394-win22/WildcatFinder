@@ -37,6 +37,7 @@ export const SignInOut = ({setProfile}) => {
         setOpen(true);
         signInWithGoogle();
         setSignInPressed(true);
+        setSignOutPressed(false);
     }
 
     const SignOut = () => {
@@ -44,6 +45,7 @@ export const SignInOut = ({setProfile}) => {
         setProfile(false);
         signOut();
         setSignOutPressed(true);
+        setSignInPressed(false);
     }
 
     const Welcome = () => {

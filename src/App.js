@@ -13,7 +13,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
-import Grow from '@mui/material/Grow';
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
 import Button from "@mui/material/Button";
@@ -127,35 +126,33 @@ function App() {
       </div>
 
       <div className="BottomBanner">
-        <Grow in={true} {...({ timeout: 2000 })}>
-          <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, background: '#4c2c83'}} enableColorOnDark={true}>
-              <Toolbar>
-                <Button sx={buttonStyle(itemsType === "Lost")} onClick={() => setItemsType("Lost")}> Lost </Button>
-                <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? PostWithoutSignIn() : handleMakePost()}>
-                  <AddIcon />
-                </StyledFab>
-                <Snackbar open={open}
-                          autoHideDuration={3000}
-                          onClose={handleSnackBarClose}
-                          anchorOrigin={{horizontal: "center", vertical:"top"}}>
-                  <Alert onClose={handleSnackBarClose} severity="info" sx={{ width: '100%' }}>
-                    Please log in to post.
-                  </Alert>
-                </Snackbar>
-                <Snackbar open={domainAlert}
-                          onClose={() => setDomainAlert(false)}
-                          anchorOrigin={{horizontal: "center", vertical:"top"}}>
-                  <Alert onClose={() => setDomainAlert(false)} severity="error" sx={{ width: '100%' }}>
-                    You must use a Northwestern email to log in.
-                  </Alert>
-                </Snackbar>
-                <Button sx={buttonStyle(itemsType === "Found")} onClick={() => setItemsType("Found")}> Found </Button>
-                <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} isMobile={isMobile} user={user}/>
-              </Toolbar>
-            </AppBar>
-          </Box>
-        </Grow>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, background: '#4c2c83'}} enableColorOnDark={true}>
+            <Toolbar>
+              <Button sx={buttonStyle(itemsType === "Lost")} onClick={() => setItemsType("Lost")}> Lost </Button>
+              <StyledFab color="primary" size="medium" aria-label="add" onClick={() => user === null ? PostWithoutSignIn() : handleMakePost()}>
+                <AddIcon />
+              </StyledFab>
+              <Snackbar open={open}
+                        autoHideDuration={3000}
+                        onClose={handleSnackBarClose}
+                        anchorOrigin={{horizontal: "center", vertical:"top"}}>
+                <Alert onClose={handleSnackBarClose} severity="info" sx={{ width: '100%' }}>
+                  Please log in to post.
+                </Alert>
+              </Snackbar>
+              <Snackbar open={domainAlert}
+                        onClose={() => setDomainAlert(false)}
+                        anchorOrigin={{horizontal: "center", vertical:"top"}}>
+                <Alert onClose={() => setDomainAlert(false)} severity="error" sx={{ width: '100%' }}>
+                  You must use a Northwestern email to log in.
+                </Alert>
+              </Snackbar>
+              <Button sx={buttonStyle(itemsType === "Found")} onClick={() => setItemsType("Found")}> Found </Button>
+              <MakePost show={makePost} handleClose={handlesMakePostClose} posts={data} isMobile={isMobile} user={user}/>
+            </Toolbar>
+          </AppBar>
+        </Box>
       </div>
     </div>
   );
