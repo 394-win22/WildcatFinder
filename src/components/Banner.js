@@ -10,7 +10,7 @@ const Banner = ({title, subtitle, descriptionLine, isMobile}) => {
                     <img src="http://www.sunimprint.com/images/Northwestern%20Wildcats%201981-Pres%20Partial%20Logo%20diy%20iron%20on%20transfer%202.png"
                        className="Image"
                        alt="AppIcon"
-                       style={isMobile ? {width: 60, height: 60, marginBottom: 20} : {width: 100, height: 100}}/>
+                       style={isMobile ? {width: 70, height: 60, marginBottom: 20} : {width: 120, height: 100}}/>
               </div>
           </Grow>
           <div className="details">

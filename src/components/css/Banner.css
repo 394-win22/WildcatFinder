@@ -10,19 +10,19 @@
 
 .BannerBrowser {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     position: relative;
     text-align: left;
     border-radius: 1rem;
     line-height: 30px;
     padding-top: 25px;
     padding-bottom: 20px;
-    margin-left: 2rem;
+    margin-left: 0.5rem;
     font-family: "Gill Sans";
   }
 
-  .BannerBrowser .details {
-  text-align: left;
+.BannerBrowser .details {
+  text-align: center;
   }
 
 
