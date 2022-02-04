@@ -168,7 +168,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                         Lost or Found Form
                     </Typography>
                     <Stack spacing={spacing}>
-                        <TextField id="itemName" name="name" label="Item Name" variant="outlined" required error={!validName} helperText="Cannot be blank" />
+                        <TextField id="itemName" inputProps={{ maxlength: 30 }} name="name" label="Item Name" variant="outlined" required error={!validName} helperText="Cannot be blank" />
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Lost or Found</InputLabel>
                             <Select
@@ -195,19 +195,19 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
 
                         <Box>
                             <TextField id="itemLocation"
-                                       label="Item Location"
-                                       variant="outlined"
-                                       required
-                                       helperText="Cannot be blank"
-
-                                       defaultValue={ mapLocation ? mapLocation : ""}
-                                       onChange={e=>{
-                                           setMapLocation(e.target.value)
-                                       }}
-                                       value ={mapLocation}
-                                       placeholder= {"Item Location"}
-                                       error={!validLoc}
-                                       sx={{width: isMobile ? "84%" : "86%"}}/>
+                                        label="Item Location"
+                                        variant="outlined"
+                                        required
+                                        helperText="Cannot be blank"
+                                        inputProps={{ maxlength: 30 }}
+                                        defaultValue={ mapLocation ? mapLocation : ""}
+                                        onChange={e=>{
+                                            setMapLocation(e.target.value)
+                                        }}
+                                        value ={mapLocation}
+                                        placeholder= {"Item Location"}
+                                        error={!validLoc}
+                                        sx={{width: isMobile ? "84%" : "86%"}}/>
                             <IconButton color="primary" aria-label="upload picture" component="span">
                                 <LocationOnIcon fontSize="large" onClick={() => setMapOpen(true)}/>
                             </IconButton>
