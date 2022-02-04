@@ -59,13 +59,13 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
     const Input = styled('input')({
         display: 'none',
     });
-
+    const width = window.innerWidth;
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: isMobile ? '1' : '0.3',
+        width: isMobile ? '1' : (width < 1428) ? '.4' : '.3' ,
         height: '1fr',
         maxHeight: '95%', 
         overflow: 'auto',
@@ -208,7 +208,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                         placeholder= {"Item Location"}
                                         error={!validLoc}
                                         sx={{width: isMobile ? "84%" : "86%"}}/>
-                            <IconButton color="primary" aria-label="upload picture" component="span">
+                            <IconButton sx={{width: isMobile ? "16%" : "14%"}} color="primary" aria-label="upload picture" component="span">
                                 <LocationOnIcon fontSize="large" onClick={() => setMapOpen(true)}/>
                             </IconButton>
                         </Box>
