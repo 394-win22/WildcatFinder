@@ -123,7 +123,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                 height: '100%',
                                                 // m: 2,
                                                 boxShadow: '2px 2px 2px 1px #D6D6D6',
-                                                p: 3
+                                                p:3
                                             }}>
                                                 <CardMedia
                                                     component="img"
@@ -136,12 +136,12 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                     pb: 0,
                                                 }}>
                                                     <ThemeProvider theme={theme}>
-                                                        <Typography gutterBottom variant="h6" component="div">
+                                                        <Typography gutterBottom variant="h6" component="div" noWrap="true">
                                                             {post[1]?.itemName}
                                                         </Typography>
                                                     </ThemeProvider>
                                                     <ThemeProvider theme={theme}>
-                                                        <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }}>
+                                                        <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }} >
                                                             <LocationOnIcon sx={{
                                                                 mr: 1,
                                                                 mb: 1
