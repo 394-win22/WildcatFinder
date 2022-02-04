@@ -117,6 +117,9 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                 border: 1,
                                                 borderColor: '#D6D6D6',
                                                 borderRadius: 4,
+                                                display:'flex',
+                                                flexDirection:'column',
+                                                justifyContent:'space-between',
                                                 height: '100%',
                                                 // m: 2,
                                                 boxShadow: '2px 2px 2px 1px #D6D6D6',
@@ -129,7 +132,7 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                     image={post[1]?.img}
                                                 />
                                                 <CardContent sx={{
-                                                    pt: 1,
+                                                    pt: 0,
                                                     pb: 0,
                                                 }}>
                                                     <ThemeProvider theme={theme}>
