@@ -117,10 +117,13 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                 border: 1,
                                                 borderColor: '#D6D6D6',
                                                 borderRadius: 4,
+                                                display:'flex',
+                                                flexDirection:'column',
+                                                justifyContent:'space-between',
                                                 height: '100%',
                                                 // m: 2,
                                                 boxShadow: '2px 2px 2px 1px #D6D6D6',
-                                                p: 3
+                                                p:3
                                             }}>
                                                 <CardMedia
                                                     component="img"
@@ -129,16 +132,16 @@ const FoundPosts = ({ posts, itemsType, searchTerm, profile, user}) => {
                                                     image={post[1]?.img}
                                                 />
                                                 <CardContent sx={{
-                                                    pt: 1,
+                                                    pt: 0,
                                                     pb: 0,
                                                 }}>
                                                     <ThemeProvider theme={theme}>
-                                                        <Typography gutterBottom variant="h6" component="div">
+                                                        <Typography gutterBottom variant="h6" component="div" noWrap="true">
                                                             {post[1]?.itemName}
                                                         </Typography>
                                                     </ThemeProvider>
                                                     <ThemeProvider theme={theme}>
-                                                        <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }}>
+                                                        <Typography variant="subtitle" color="text.secondary" sx={{ p: 0 }} >
                                                             <LocationOnIcon sx={{
                                                                 mr: 1,
                                                                 mb: 1
