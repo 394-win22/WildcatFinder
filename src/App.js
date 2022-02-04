@@ -1,6 +1,6 @@
 import './App.css'
 import React, { useEffect, useState } from 'react';
-import {useData, useUserState,signInWithGoogle} from './utilities/firebase';
+import {useData, useUserState,signInWithGoogle, signOut} from './utilities/firebase';
 import Banner from './components/Banner'
 import FoundPosts from './components/FoundPosts'
 import MakePost from './components/MakePost'
@@ -72,6 +72,7 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [profile, setProfile] = useState(false);
   const [open, setOpen] = useState(false);
+  const [domainAlert, setDomainAlert] = useState(false);
 
   const handleSnackBarClose = () => setOpen(false);
 
@@ -97,6 +98,15 @@ function App() {
   useEffect(() => {
     if (data === undefined) return;
   }, [data])
+
+  // validate user email domain
+  useEffect(() => {
+    if (user && !user?.email?.split("@")?.[1]?.includes("northwestern.edu")) {
+      setDomainAlert(true);
+      signOut();
+    }
+  }, [user])
+
   if (errorData) return <Error404 />;
   if (loadingData) return <Loading isMobile={isMobile}/>;
 
@@ -130,7 +140,14 @@ function App() {
                           onClose={handleSnackBarClose}
                           anchorOrigin={{horizontal: "center", vertical:"top"}}>
                   <Alert onClose={handleSnackBarClose} severity="info" sx={{ width: '100%' }}>
-                    Please Log in to post.
+                    Please log in to post.
+                  </Alert>
+                </Snackbar>
+                <Snackbar open={domainAlert}
+                          onClose={() => setDomainAlert(false)}
+                          anchorOrigin={{horizontal: "center", vertical:"top"}}>
+                  <Alert onClose={() => setDomainAlert(false)} severity="error" sx={{ width: '100%' }}>
+                    You must use a Northwestern email to log in.
                   </Alert>
                 </Snackbar>
                 <Button sx={buttonStyle(itemsType === "Found")} onClick={() => setItemsType("Found")}> Found </Button>
