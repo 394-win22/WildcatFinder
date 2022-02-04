@@ -100,7 +100,7 @@ function App() {
 
   // validate user email domain
   useEffect(() => {
-    if (user && !user?.email?.split("@")?.[1]?.includes("northwestern.edu")) {
+    if (user && !RegExp('(.*)@(.*)northwestern.edu').test(user?.email)) {
       setDomainAlert(true);
       signOut();
     }
