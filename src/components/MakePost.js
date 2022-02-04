@@ -199,7 +199,7 @@ function MakePost({ show, handleClose, posts, isMobile, user }) {
                                         variant="outlined"
                                         required
                                         helperText="Cannot be blank"
-                                        inputProps={{ maxlength: 30 }}
+                                        inputProps={{ maxlength: 50 }}
                                         defaultValue={ mapLocation ? mapLocation : ""}
                                         onChange={e=>{
                                             setMapLocation(e.target.value)
