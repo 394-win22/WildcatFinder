@@ -7,7 +7,7 @@ const Banner = ({title, subtitle, descriptionLine, isMobile}) => {
       <div className={isMobile ? 'BannerMobile' : 'BannerBrowser'}>
           <Grow in={true} {...({ timeout: 2000 })}>
               <div className={isMobile ? "logoMobile" : "logoBrowser"}>
-                  <img src="https://s2.loli.net/2022/01/10/XhDq1dtigxlfyrQ.png"
+                    <img src="http://www.sunimprint.com/images/Northwestern%20Wildcats%201981-Pres%20Partial%20Logo%20diy%20iron%20on%20transfer%202.png"
                        className="Image"
                        alt="AppIcon"
                        style={isMobile ? {width: 60, height: 60, marginBottom: 20} : {width: 100, height: 100}}/>
