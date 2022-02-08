@@ -16,12 +16,12 @@ const buttonStyle = {
     borderRadius: 2,
     color: "rgb(255, 255, 255)",
     '&:hover': {
-      bgcolor: "rgba(129,182,239,0.95)"
+        bgcolor: "#674b94"
     },
     '&:focus': {
-      bgcolor: "rgba(129,182,239,0.95)"
+        bgcolor: "#674b94"
     },
-  }
+}
 
 export const SignInOut = ({setProfile}) => {
     const [user] = useUserState();

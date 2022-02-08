@@ -1,4 +1,4 @@
-import {alpha, styled} from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import Grow from "@mui/material/Grow";
 import Box from "@mui/material/Box";
@@ -8,11 +8,11 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
-import {SignInOut} from "./LogInButtons";
+import { SignInOut } from "./LogInButtons";
 import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
-import React, {useState,useEffect} from "react";
-import { signInWithGoogle} from '../utilities/firebase.js';
+import React, { useState, useEffect } from "react";
+import { signInWithGoogle } from '../utilities/firebase.js';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -57,13 +57,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const buttonStyle = {
+    mx: 2,
+    margin: '1%',
+    bgcolor: "inherit",
+    borderRadius: 2,
+    color: "rgb(255, 255, 255)",
+    '&:hover': {
+        bgcolor: "#674b94"
+    },
+    '&:focus': {
+        bgcolor: "#674b94"
+    },
+}
 
-export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => {
+
+export const NavigationBar = ({ user, setSearchTerm, setProfile, searchTerm }) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const handleScroll = () => {
         const position = window.pageYOffset;
         setScrollPosition(position);
-        
+
     };
 
     useEffect(() => {
@@ -77,29 +91,29 @@ export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => 
     return (
         <Grow in={true} {...({ timeout: 2000 })}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar className = "appbar" position={(scrollPosition > 250 ) ? "fixed" : "relative"} enableColorOnDark={true} style={{ background: '#4c2c83'}}>
+                <AppBar className="appbar" position={(scrollPosition > 250) ? "fixed" : "relative"} enableColorOnDark={true} style={{ background: '#4c2c83' }}>
                     <Toolbar>
                         {user &&
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    sx={{ mr: 2 }}
-                                >
-                                    <HomeIcon onClick={() => setProfile(false)}/>
-                                </IconButton>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                sx={{ mr: 2 }, buttonStyle}
+                            >
+                                <HomeIcon onClick={() => setProfile(false)} />
+                            </IconButton>
                         }
                         {user &&
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    sx={{mr: 2}}
-                                >
-                                    <AccountCircle onClick={() => setProfile(true)}/>
-                                </IconButton>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                sx={{ mr: 2 }, buttonStyle }
+                            >
+                                <AccountCircle onClick={() => setProfile(true)} />
+                            </IconButton>
                         }
                         <Typography
                             variant="body1"
@@ -107,9 +121,9 @@ export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => 
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                         >
-                            { user ? <span> Welcome! {user.email} </span>
-                                   : <span>Please <a style = {{cursor: 'pointer',textDecorationLine: 'underline'}}
-                                                     onClick={signInWithGoogle}> log in </a> to check your posts </span>}
+                            {user ? <span> Welcome! {user.email} </span>
+                                : <span>Please <a style={{ cursor: 'pointer', textDecorationLine: 'underline' }}
+                                    onClick={signInWithGoogle}> log in </a> to check your posts </span>}
                         </Typography>
                         <Search>
                             <SearchIconWrapper>
@@ -119,11 +133,11 @@ export const NavigationBar = ({user, setSearchTerm, setProfile, searchTerm}) => 
                                 value={searchTerm}
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
-                                onChange={(event) => {setSearchTerm(event.target.value)} }
+                                onChange={(event) => { setSearchTerm(event.target.value) }}
                             />
                         </Search>
-                        <Button sx={{color:"inherit"}} onClick={() => setSearchTerm("")}> clear </Button>
-                        <SignInOut setProfile={setProfile}/>
+                        <Button sx={buttonStyle} onClick={() => setSearchTerm("")}> clear </Button>
+                        <SignInOut setProfile={setProfile} />
                     </Toolbar>
                 </AppBar>
             </Box>
